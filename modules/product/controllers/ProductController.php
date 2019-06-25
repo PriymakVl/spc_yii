@@ -9,9 +9,9 @@ use app\modules\product\classes\Product;
 class ProductController extends BaseController
 {
 
-    public function actionIndex()
+    public function actionIndex($id_prod)
     {
-		$product = (new Product)->get($this->request->get('id_prod'));
+		$product = (new Product)->get($id_prod);
     	$this->view->title = $product->code;
 		return $this->render('index/main');
     }
