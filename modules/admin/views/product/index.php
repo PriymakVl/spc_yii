@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\grid\GridView;
+use app\modules\category\classes\Category;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\ProductSearch */
@@ -31,7 +32,11 @@ $this->title = 'Продукты';
             'name',
             //'description:ntext',
             'price',
-            'id_cat',
+            //'id_cat',
+            ['attribute' => 'id_cat', 
+            'value' => function($model) {return Category::findOne($model->id_cat)->name;}, 
+            'filter' => (new Category)->getForSelect()
+            ],
             //'status',
 
             ['class' => 'yii\grid\ActionColumn', ], //'template' => '{delete}'
