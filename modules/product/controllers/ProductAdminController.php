@@ -1,10 +1,10 @@
 <?php
 
-namespace app\modules\admin\controllers;
+namespace app\modules\product\controllers;
 
 use Yii;
-use app\modules\admin\models\Product;
-use app\modules\admin\models\ProductSearch;
+use app\modules\product\classes\Product;
+use app\modules\product\classes\ProductSearch;
 use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * ProductController implements the CRUD actions for Product model.
  */
-class ProductController extends BaseController
+class ProductAdminController extends BaseController
 {
 	public $layout = 'admin';
 	
@@ -39,11 +39,7 @@ class ProductController extends BaseController
     {
         $searchModel = new ProductSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', compact('searchModel', 'dataProvider'));
     }
 
     /**

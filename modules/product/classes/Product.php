@@ -10,5 +10,16 @@ class Product extends ProductBase {
 
 	use ProductModel;
 
+ 	public function delete()
+    {
+        $this->status = 0;
+        $this->save();
+        return $this;
+    }
+
+    public function getCategory()
+    {
+    	return Category::findOne($this->id_cat);
+    }
    
 }

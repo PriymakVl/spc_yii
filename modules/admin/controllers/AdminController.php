@@ -15,10 +15,10 @@ class AdminController extends BaseController
 
     public function actionLogin()
     {
-    	if (!Yii::$app->user->isGuest) return $this->redirect(['product']);
+    	//if (!Yii::$app->user->isGuest) return $this->redirect(['admin/product']);
 
         $model = new LoginFormAdmin();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) $this->redirect(['product']);
+        if ($model->load(Yii::$app->request->post()) && $model->login()) $this->redirect(['admin/product']);
 
         $model->password = '';
         return $this->render('login', ['model' => $model]);
