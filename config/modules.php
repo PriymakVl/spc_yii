@@ -13,6 +13,6 @@
 
         'admin' => [
             'class' => 'app\modules\admin\AdminModule',
-            'defaultRoute' => 'admin/login'//name controller
+            'defaultRoute' => 'admin/login'
         ],
     ];

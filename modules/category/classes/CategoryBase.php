@@ -17,6 +17,16 @@ class CategoryBase extends ModelBase {
         return '{{categories}}';
     }
 
+    public function attributeLabels()
+    {
+        return [
+            'name' => 'Название',
+            'full_name' => 'Полное название',
+            'id_parent' => 'Родитель',
+        ];
+    }
+
+
 
 
 

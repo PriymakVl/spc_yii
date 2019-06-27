@@ -7,4 +7,6 @@ return [
 		'@banner' => '/web/banners',
 		'@prod' => '/web/products',
 		'@category' => '/modules/category',
+		'@views' => '@app/views',
+		'@layouts' => '@views/layouts',
 ];

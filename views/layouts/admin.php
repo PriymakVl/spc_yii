@@ -30,7 +30,7 @@ AppAsset::register($this);
     <?php
     NavBar::begin([
         'brandLabel' => 'Specialist',
-        'brandUrl' => '/admin',
+        'brandUrl' => '/',
         'options' => [
             'class' => 'navbar-inverse navbar-fixed-top',
         ],
@@ -38,8 +38,8 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
-            ['label' => 'Категории', 'url' => ['/admin/category/index']],
-            ['label' => 'Продукты', 'url' => ['/admin/product/index']],
+            ['label' => 'Категории', 'url' => ['/admin/category']],
+            ['label' => 'Продукты', 'url' => ['/admin/product']],
             ['label' => 'Выход', 'url' => ['/admin/logout']],
             // Yii::$app->user->isGuest ? (
             //     ['label' => 'Login', 'url' => ['/site/login']]

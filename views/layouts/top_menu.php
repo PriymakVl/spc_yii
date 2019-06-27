@@ -45,7 +45,7 @@ BaseAsset::register($this);
 			</ul>
 		</li>		
 		<li>
-			<a href="/contacts/" >Контакты</a>
+			<a href="/contacts">Контакты</a>
 		</li>
 	</ul>
 </nav>

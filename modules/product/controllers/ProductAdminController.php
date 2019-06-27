@@ -14,7 +14,7 @@ use yii\filters\VerbFilter;
  */
 class ProductAdminController extends BaseController
 {
-	public $layout = 'admin';
+	public $layout = '@layouts/admin';
 	
     /**
      * {@inheritdoc}

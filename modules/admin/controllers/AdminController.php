@@ -11,7 +11,7 @@ use app\modules\admin\models\AdminProduct;
 class AdminController extends BaseController
 {
 
-	public $layout = 'admin';
+	public $layout = '@layouts/admin';
 
     public function actionLogin()
     {

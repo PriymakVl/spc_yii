@@ -4,11 +4,14 @@ namespace app\modules\product\classes;
 
 use app\modules\product\classes\ProductBase;
 use app\modules\product\models\ProductModel;
+use app\modules\category\classes\Category;
 
 
 class Product extends ProductBase {
 
 	use ProductModel;
+
+    // public $category;
 
  	public function delete()
     {
@@ -19,7 +22,8 @@ class Product extends ProductBase {
 
     public function getCategory()
     {
-    	return Category::findOne($this->id_cat);
+        $this->category = $this->getCategory();
+        return $this;
     }
    
 }

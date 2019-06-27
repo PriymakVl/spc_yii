@@ -4,6 +4,7 @@
 
 	use Yii;
 	use app\modules\category\classes\Category;
+	// use app\modules\product\classes\Product;
 	
 class MainController extends BaseController {
 
@@ -11,5 +12,11 @@ class MainController extends BaseController {
 	{
 		$this->view->title = 'Пневмооборудование';
 		return $this->render('index');
+	}
+
+	public function actionContacts()
+	{
+		$this->view->title = 'Контакты';
+		return $this->render('contacts/main');
 	}
 }

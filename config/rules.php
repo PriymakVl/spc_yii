@@ -2,7 +2,9 @@
 
 return [
 	'/' => 'main/index',
-	'admin/product/index' => 'product/product-admin/index',
+	'admin/product' => 'product/product-admin/index',
+	'admin/category' => 'category/category-admin/index',
 	'admin' => 'admin/admin/login',
 	'admin/logout' => 'admin/admin/logout',
+	'contacts' => 'main/contacts',
 ];

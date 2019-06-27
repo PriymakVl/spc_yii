@@ -23,7 +23,7 @@ class ProductBase extends ModelBase {
         return '{{products}}';
     }
 
-     public function rules()
+    public function rules()
     {
         return [
             [['code', 'name', 'price', 'id_cat'], 'required'],
@@ -34,7 +34,7 @@ class ProductBase extends ModelBase {
         ];
     }
 
-     public function attributeLabels()
+    public function attributeLabels()
     {
         return [
             'id' => 'ID',
