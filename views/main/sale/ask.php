@@ -1,6 +1,11 @@
-<div class="form-feedback-wrp">
-	<blockquote>В офисе нашей компании Вы получите техническую консультацию по любым вопросам связным с пневматическим оборудованием и системами автоматики.</blockquote>
-	<h2>Обратная связь</h2>
+<!-- ask -->
+<div class="ask-wrp">
+	<input type="button" value="Задать вопрос">
+	<p>Наши специалисты с радостью ответят на любой интересующий по нашим услугам вопрос.</p>
+</div>
+
+<!-- form -->
+<div class="form-ask-wrp" style="display: none;">
 	<form action="">
 		<section>
 			<label>Ваше имя<i class="fas fa-star-of-life"></i></label>

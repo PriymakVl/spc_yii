@@ -19,4 +19,11 @@ class MainController extends BaseController {
 		$this->view->title = 'Контакты';
 		return $this->render('contacts/main');
 	}
+
+	public function actionSale()
+	{
+		$this->view->title = 'Акции';
+		return $this->render('sale/main');
+	}
+
 }

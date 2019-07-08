@@ -7,4 +7,5 @@ return [
 	'admin' => 'admin/admin/login',
 	'admin/logout' => 'admin/admin/logout',
 	'contacts' => 'main/contacts',
+	'sale' => 'main/sale',
 ];

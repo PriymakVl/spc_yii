@@ -8,8 +8,7 @@
 	<div class="breadcrumbs-wrp">
 		<ul class="breadcrumbs">
 			<li><a href="#"></a>Главная</li>
-			<li><a href="#"></a>Каталог</li>
-			<li><a href="#"></a>Блоки подготовки воздуха</li>
+			<li><a href="#"></a>Контакты</li>
 		</ul>
 	</div>
 
