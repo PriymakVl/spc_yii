@@ -16,13 +16,11 @@
 
 	
 	<div class="inner-wrp">
-		<div class="sale-wrp">
-			<!-- sale -->
-			<? include 'sale.php'; ?>
+		<!-- sale -->
+		<? include 'sale.php'; ?>
 
-			<!-- ask form -->
-			<? include 'ask.php'?>
-		<div>
+		<!-- ask form -->
+		<? include 'ask.php'?>
 	</div>
 
 </main>

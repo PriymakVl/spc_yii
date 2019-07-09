@@ -1,6 +1,8 @@
 <!-- ask -->
 <div class="ask-wrp">
-	<input type="button" value="Задать вопрос">
+	<div class="button-wrp">
+		<input type="button" value="Задать вопрос">
+	</div>
 	<p>Наши специалисты с радостью ответят на любой интересующий по нашим услугам вопрос.</p>
 </div>
 
