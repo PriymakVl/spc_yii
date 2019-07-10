@@ -12,6 +12,7 @@ class Product extends ProductBase {
 	use ProductModel;
 
     // public $category;
+    public $image;
 
  	public function delete()
     {
@@ -23,6 +24,12 @@ class Product extends ProductBase {
     public function getCategory()
     {
         $this->category = $this->getCategory();
+        return $this;
+    }
+
+    public function getImage()
+    {
+        $this->image = (new Image)->get($this->id_img);
         return $this;
     }
    

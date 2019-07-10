@@ -4,11 +4,12 @@ namespace app\modules\category\classes;
 
 use app\models\ModelBase;
 use app\modules\category\traits\CategoryList; 
+use app\modules\category\traits\CategoryModel; 
 
 
 class CategoryBase extends ModelBase {
 
-	use CategoryList;
+	use CategoryList, CategoryModel;
    
     public $image;
     

@@ -11,7 +11,7 @@ class CategoryController extends BaseController {
 
 	public function actionIndex($id_cat)
 	{
-		$cat = (new Category)->get($id_cat)->getChildren()->getProducts();
+		$cat = (new Category)->get($id_cat)->getChildren()->getProducts()->getImage();
 		return $this->render('index/main', compact('cat'));
 	}
 

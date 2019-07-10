@@ -55,5 +55,12 @@ class ModelBase extends ActiveRecord {
     	return self::find()->where(['id_parent' => $id_parent, 'status' => self::STATUS_ACTIVE])->all();
     }
 
+    public function delete()
+    {
+        $this->status = 0;
+        $this->save();
+        return $this;
+    }
+
 
 }

@@ -9,4 +9,5 @@ return [
 		'@category' => '/modules/category',
 		'@views' => '@app/views',
 		'@layouts' => '@views/layouts',
+		'@iblock' => '@img/iblock',
 ];

@@ -14,7 +14,7 @@
 	</div>
 
 	<!-- name category -->
-	<h1 class="category-name"><?=$cat->full_name ? $cat->full_name : $cat->name?></h1>
+	<h1 class="category-name"><?=$cat->name?></h1>
 
 	<!-- sub categories -->
 	<? if ($cat->products) include 'products.php'; ?>
