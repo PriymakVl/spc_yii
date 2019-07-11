@@ -19,7 +19,7 @@
 									<? foreach ($cat->children as $subcat): ?>
 										<li>
 											<a href="<?=Url::to(['/category', 'id_cat' => $subcat->id])?>">
-												<?= Html::img('@prod/1.jpeg', ['alt' => $subcat->name, 'width' => '50', 'height'=> '50']) ?>
+												<?= Html::img('@img/'.$subcat->image->subdir.'/'.$subcat->image->filename, ['alt' => $subcat->name, 'width' => '50', 'height'=> '50']) ?>
 												<span><?=$subcat->name?></span>
 											</a>
 										</li>

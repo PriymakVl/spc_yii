@@ -10,6 +10,9 @@ class MainController extends BaseController {
 
 	public function actionIndex()
 	{
+				$cats = (new Category)->getMain();
+		debug($cats[5]->children);
+		debugProp($cat->children, 'image');
 		$this->view->title = 'Пневмооборудование';
 		return $this->render('index');
 	}

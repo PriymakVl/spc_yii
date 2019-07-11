@@ -15,6 +15,7 @@ class Category extends CategoryBase {
 	public function getProducts()
 	{
 		$this->products = (new Product)->selectByIdCategory($this->id);
+		if ($this->products) $this->callMethods($this->products, ['getImage', 'getPrice']);
 		return $this;
 	}
 

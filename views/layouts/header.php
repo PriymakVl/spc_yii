@@ -1,6 +1,8 @@
 <?php
 use app\assets\BaseAsset;
 use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
 BaseAsset::register($this);
 ?>
 
@@ -56,8 +58,8 @@ BaseAsset::register($this);
 
 	<!-- search -->
 	<div class="search-wrp">
-		<form action="">
-			<input type="text" placeholder="Поиск по товарам" maxlength="100" autocomplete="off">
+		<form action="/search">
+			<input type="text" name="name" placeholder="Поиск продукции" maxlength="100" autocomplete="off" required>
 			<input type="submit" class="search-icon">
 		</form>
 	</div>

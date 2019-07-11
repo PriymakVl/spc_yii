@@ -11,9 +11,14 @@ class ProductController extends BaseController
 	
     public function actionIndex($id_prod)
     {
-        $product = (new Product)->get($id_prod)->getImage();
-        debug($product->image);
+        $product = (new Product)->get($id_prod)->getImage()->getPrice();
         $this->view->title = $product->name;
         return $this->render('index/main');
+    }
+
+    public function actionSearch($name)
+    {
+    	$products = Product::find()->where(['like', 'name', $name])->all();
+    	return $this->render('search/main', compact('products'));
     }
 }
