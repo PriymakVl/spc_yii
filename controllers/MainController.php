@@ -10,9 +10,13 @@ class MainController extends BaseController {
 
 	public function actionIndex()
 	{
-				$cats = (new Category)->getMain();
-		debug($cats[5]->children);
-		debugProp($cat->children, 'image');
+		// $cats = Category::find()->all();
+		// $sum = 0;
+		// foreach ($cats as $cat) {
+		// 	if (!$cat->description) continue;
+		// 	str_replace('upload/medialibrary', 'web/images/medialibrary', $cat->description);
+		// }
+		// debug('exit');
 		$this->view->title = 'Пневмооборудование';
 		return $this->render('index');
 	}

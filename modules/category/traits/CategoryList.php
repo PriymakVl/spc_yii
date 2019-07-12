@@ -7,8 +7,14 @@ trait CategoryList {
 	public function getMain()
     {
     	$cats = $this->selectByIdParent(null);
-        $cats = $this->callMethods($cats, ['getChildren']);
-        if ($cats->children) $cats->children = $this->callMethods($cats->children, ['getImage']);
+    	if (!$cats) return;
+        foreach ($cats as $cat) {
+        	$cat->getChildren();
+        	if (!$cat->children) continue;
+        	foreach ($cat->children as $subcat) {
+        		$subcat->getImage();
+        	}
+        }
         return $cats;
     }
 

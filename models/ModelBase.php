@@ -3,6 +3,7 @@
 namespace app\models;
 
 use yii\db\ActiveRecord;
+use app\helpers\Helper;
 
 class ModelBase extends ActiveRecord {
 
@@ -20,21 +21,14 @@ class ModelBase extends ActiveRecord {
         else return $object;
     }
 
-	protected function  callMethods( array $array, array $methods) 
+	public function  callMethods( array $array, array $methods) 
     {
-        foreach ($array as $object)
-        {
-            $this->callMethod($object, $methods);
-        }
-        return $array;
+        return Helper::callMethods($array, $methods);
     }
 
     public function callMethod($object, $methods)
     {
-        foreach ($methods as $method_name) {
-            $object->$method_name();
-        }
-        return $object;
+        return Helper::callMethod($object, $methods);
     }
 
     public function getChildren()

@@ -1,6 +1,7 @@
 <?php
 	use yii\helpers\Url;
 	use yii\helpers\Html;
+	use yii\widgets\LinkPager;
 ?>
 <!-- sort product -->
 <!-- <div class="sort-product-wrp">
@@ -13,8 +14,8 @@
 
 <!-- products -->
 <div class="product-block">
-	<? if ($cat->products): ?>
-		<? foreach ($cat->products as $product): ?>
+	<? if ($products): ?>
+		<? foreach ($products as $product): ?>
 			<a class="product-item" href="<?=Url::to(['/product', 'id_prod' => $product->id])?>">
 				<? if ($product->image): ?>
 					<?= Html::img(['@img/'.$product->image->subdir.'/'.$product->image->filename, ['alt' => $product->name]]) ?>
@@ -23,13 +24,18 @@
 				<? endif; ?>
 				<span class="product-code"><?=$product->name?></span>
 				<span class="product-state"><i class="fa fa-check"></i>Достаточно</span>
-				<span class="product-price">
-					<span class="price-value"><?=$product->price->value?></span>
-					<span class="price-currency">грн.</span>
-					<span class="price-measure">/шт</span>
-				</span>
+				<? if ($product->price->value): ?>
+					<span class="product-price">
+						<span class="price-value"><?=$product->price->value?></span>
+						<span class="price-currency">грн.</span>
+						<span class="price-measure">/шт</span>
+					</span>
+				<? endif; ?>
 			</a>
 		<? endforeach; ?>
 	<? endif; ?>
-</div> 
+</div>
+
+<!-- pagination -->
+<?php echo LinkPager::widget(['pagination' => $pages,]); ?>
 
