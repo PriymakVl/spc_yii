@@ -8,9 +8,12 @@
 	<!-- breadcrumbs -->
 	<div class="breadcrumbs-wrp">
 		<ul class="breadcrumbs">
-			<li><a href="#"></a>Главная</li>
-			<li><a href="#"></a>Каталог</li>
-			<li><a href="#"></a>Блоки подготовки воздуха</li>
+			<li><a href="/">Главная</a></li>
+			<li><a href="category/list">Каталог</a></li>
+			<? if ($cat->parent): ?>
+				<li><a href="/category?id_cat=<?=$cat->parent->id?>"><?=$cat->parent->name?></a></li>
+			<? endif; ?>	
+			<li><a href="/category?id_cat=<?=$cat->id?>"><?=$cat->name?></a></li>
 		</ul>
 	</div>
 

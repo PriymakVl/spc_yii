@@ -5,6 +5,11 @@ use yii\helpers\Html;
 ?>
 
 <aside>
+	<!-- filters products -->
+	<? if (Yii::$app->controller->id == 'category'): ?>
+		<? include 'filters.php' ?>
+	<? endif; ?>
+
 	<!-- banner -->
 	<div class="banner">
 		<a href="#">

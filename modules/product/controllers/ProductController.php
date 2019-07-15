@@ -13,7 +13,7 @@ class ProductController extends BaseController
     {
         $product = (new Product)->get($id_prod)->getImage()->getPrice();
         $this->view->title = $product->name;
-        return $this->render('index/main');
+        return $this->render('index/main', compact('product'));
     }
 
     public function actionSearch($name)
