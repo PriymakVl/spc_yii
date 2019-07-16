@@ -21,4 +21,5 @@ class ProductController extends BaseController
     	$products = Product::find()->where(['like', 'name', $name])->all();
     	return $this->render('search/main', compact('products'));
     }
+
 }

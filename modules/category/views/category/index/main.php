@@ -30,7 +30,7 @@
 
 	<!-- category description -->
 	<div class="description-wrp">
-		<?php if ($cat->description) echo $cat->description; ?>
+		<?php if ($pages && $cat->description) echo $cat->description; ?>
 	</div>
 
 	<!-- similar products -->

@@ -24,6 +24,7 @@ class BaseAsset extends AssetBundle
         'css/site.css', 'css/template.css', 'css/header_top_row.css', 'css/header.css', 'css/top_menu.css', 'css/sidebar.css', 'css/main.css', 'css/footer.css', 'css/catalog_menu.css', 'css/breadcrumbs.css', 'css/filters.css',
     ];
     public $js = [
+        'js/filter_show.js'
     ];
     public $depends = [
         'yii\web\YiiAsset',

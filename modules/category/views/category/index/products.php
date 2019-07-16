@@ -37,5 +37,5 @@
 </div>
 
 <!-- pagination -->
-<?php echo LinkPager::widget(['pagination' => $pages,]); ?>
+<?php if ($pages) echo LinkPager::widget(['pagination' => $pages,]); ?>
 

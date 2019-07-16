@@ -9,4 +9,5 @@ return [
 	'contacts' => 'main/contacts',
 	'sale' => 'main/sale',
 	'search' => 'product/product/search',
+	'filter' => 'category/category/filter',
 ];

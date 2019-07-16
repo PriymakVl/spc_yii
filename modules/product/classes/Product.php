@@ -4,6 +4,7 @@ namespace app\modules\product\classes;
 
 use app\modules\product\classes\ProductBase;
 use app\modules\product\models\ProductModel;
+use app\modules\product\filters\ProductFilter;
 use app\modules\category\classes\Category;
 use app\models\Image;
 use app\models\ProductPrice;
@@ -11,7 +12,7 @@ use app\models\ProductPrice;
 
 class Product extends ProductBase {
 
-	use ProductModel;
+	use ProductModel, ProductFilter;
 
     public $category;
     public $image;
