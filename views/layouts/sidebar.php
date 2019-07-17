@@ -1,14 +1,13 @@
 <?php
 
 use yii\helpers\Html;
+use app\widgets\FilterWidget;
 
 ?>
 
 <aside>
 	<!-- filters products -->
-	<? if (Yii::$app->controller->id == 'category'): ?>
-		<? include 'filters.php' ?>
-	<? endif; ?>
+	<?= FilterWidget::widget(); ?>
 
 	<!-- banner -->
 	<div class="banner">

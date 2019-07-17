@@ -5,6 +5,7 @@ namespace app\modules\category\classes;
 use app\modules\category\classes\CategoryBase;
 use app\modules\product\classes\Product;
 use app\models\Image;
+use app\models\Filter;
 
 class Category extends CategoryBase {
 
@@ -29,6 +30,11 @@ class Category extends CategoryBase {
     {
         $this->image = (new Image)->get($this->id_img);
         return $this;
+    }
+
+    public function getFilters()
+    {
+    	return (new Filter)->getForCategory($this->id);
     }
    
 }
