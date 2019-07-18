@@ -25,7 +25,6 @@ class CategoryController extends BaseController {
 
 	public function actionFilter($id_cat)
     {
-    	debug($_GET);
     	$cat = (new Category)->get($id_cat)->getChildren()->getParent();
         $products = (new Product)->filter($id_cat);
         return $this->render('index/main', compact('cat', 'products'));

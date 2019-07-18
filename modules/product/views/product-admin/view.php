@@ -30,12 +30,11 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'code',
             'name',
             'description:ntext',
-            'price',
-            'id_cat',
-            'status',
+            ['attribute' => 'price', 'label' => 'Цена', 'value' => function($model) {return $model->price->value.' '.$model->price->currency;}],
+             ['attribute' => 'id_cat', 'label' => 'Категория', 'value' => function($model) {return $model->category->name;}], 
+            // 'status',
         ],
     ]) ?>
 

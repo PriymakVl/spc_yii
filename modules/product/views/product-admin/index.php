@@ -3,6 +3,7 @@
 use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\category\classes\Category;
+use app\modules\product\classes\ProductPrice;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\modules\admin\models\ProductSearch */
@@ -28,15 +29,14 @@ $this->title = 'Продукты';
             ['class' => 'yii\grid\SerialColumn'],
 
             //'id',
-            'code',
             'name',
             //'description:ntext',
-            'price',
-            //'id_cat',
+            ['attribute' => 'price', 'label' => 'Цена', 'value'=> function ($model) {return (new ProductPrice)->selectByIdProduct($model->id)->value;}],
             ['attribute' => 'id_cat', 
             'value' => function($model) {return Category::findOne($model->id_cat)->name;}, 
-            'filter' => (new Category)->getForSelect()
+           // 'filter' => (new Category)->getForSelect()
             ],
+            'IBLOCK_ID',
             //'status',
 
             ['class' => 'yii\grid\ActionColumn', ], //'template' => '{delete}'

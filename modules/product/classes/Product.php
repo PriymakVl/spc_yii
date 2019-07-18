@@ -7,8 +7,7 @@ use app\modules\product\models\ProductModel;
 use app\modules\product\filters\ProductFilter;
 use app\modules\category\classes\Category;
 use app\models\Image;
-use app\models\ProductPrice;
-
+use app\modules\product\classes\ProductPrice;
 
 class Product extends ProductBase {
 
@@ -17,6 +16,7 @@ class Product extends ProductBase {
     public $category;
     public $image;
     public $price;
+    public $itemsFilters;
 
  	public function delete()
     {
@@ -27,7 +27,7 @@ class Product extends ProductBase {
 
     public function getCategory()
     {
-        $this->category = $this->getCategory();
+        $this->category = (new Category)->get($this->id_cat);
         return $this;
     }
 
@@ -40,6 +40,12 @@ class Product extends ProductBase {
     public function getPrice()
     {
         $this->price = (new ProductPrice)->selectByIdProduct($this->id);
+        return $this;
+    }
+
+    public function getItemsOfFilters()
+    {
+        $this->itemsFilters = (new ProductItemFilter)->getAll($this->id);
         return $this;
     }
    

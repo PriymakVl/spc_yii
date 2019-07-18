@@ -50,7 +50,8 @@ class ProductAdminController extends BaseController
      */
     public function actionView($id)
     {
-        return $this->render('view', ['model' => $this->findModel($id)]);
+        $product = $this->findModel($id);
+        return $this->render('view', ['model' => $product]);
     }
 
 
@@ -90,7 +91,7 @@ class ProductAdminController extends BaseController
     protected function findModel($id)
     {
         $product = Product::find()->where(['id' => $id, 'status' => Product::STATUS_ACTIVE])->limit(1)->one();
-        if ($product !== null) return $product;
+        if ($product !== null) return $product->getPrice()->getCategory()->getImage();
         throw new NotFoundHttpException('The requested page does not exist.');
     }
 }

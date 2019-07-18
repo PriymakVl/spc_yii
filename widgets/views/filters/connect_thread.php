@@ -12,7 +12,7 @@
 		<? if ($filter->items): ?>
 			<? foreach ($filter->items as $item): ?>
 				<div class="filter-item-wrp">
-					<input type="checkbox" name="connect_thread" value="<?=$item->id?>">
+					<input type="checkbox" name="connect_thread[]" value="<?=$item->id?>" <? if (isset($_GET['connect_thread']) && in_array($item->id, $_GET['connect_thread'])) echo 'checked'?>>
 					<label><?=$item->name?></label>
 				</div>
 			<? endforeach; ?>

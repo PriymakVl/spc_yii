@@ -3,7 +3,7 @@
 namespace app\models;
 
 use app\models\ModelBase;
-use app\models\FilterCategory;
+use app\modules\category\classes\CategoryFilter;
 
 class Filter extends ModelBase {
 
@@ -16,7 +16,7 @@ class Filter extends ModelBase {
 
     public function getForCategory($id_cat)
     {
-    	$ids_arr = (new FilterCategory)->selectByIdCategory($id_cat);
+    	$ids_arr = (new CategoryFilter)->selectByIdCategory($id_cat);
     	if ($ids_arr) return self::find()->select('name')->where(['id' => $ids_arr])->column();
     }
 

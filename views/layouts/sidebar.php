@@ -7,7 +7,7 @@ use app\widgets\FilterWidget;
 
 <aside>
 	<!-- filters products -->
-	<?= FilterWidget::widget(); ?>
+	<?if (Yii::$app->controller->id == 'category') echo FilterWidget::widget(); ?>
 
 	<!-- banner -->
 	<div class="banner">

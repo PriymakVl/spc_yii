@@ -1,14 +1,14 @@
 <?php
 
-namespace app\models;
+namespace app\modules\category\classes;
 
 use app\models\ModelBase;
 
-class FilterCategory extends ModelBase {
+class CategoryFilter extends ModelBase {
 
 	public static function tableName()
     {
-        return '{{filters_categories}}';
+        return '{{categories_filters}}';
     }
 
 

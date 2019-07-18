@@ -11,7 +11,7 @@
 		<!-- form button block -->
 		<div class="form-button-wrp">
 			<input type="submit" value="Показать">
-			<a href="#"><i class="fas fa-times"></i>Сбросить</a>
+			<a href="/category?id_cat=<?=$_GET['id_cat']?>"><i class="fas fa-times"></i>Сбросить</a>
 		</div>
 	</form>
 </div>
