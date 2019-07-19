@@ -8,10 +8,11 @@ use app\modules\product\filters\ProductFilter;
 use app\modules\category\classes\Category;
 use app\models\Image;
 use app\modules\product\classes\ProductPrice;
+use app\modules\product\traits\ProductAdminTrait;
 
 class Product extends ProductBase {
 
-	use ProductModel, ProductFilter;
+	use ProductModel, ProductFilter, ProductAdminTrait;
 
     public $category;
     public $image;
@@ -47,6 +48,11 @@ class Product extends ProductBase {
     {
         $this->itemsFilters = (new ProductItemFilter)->getAll($this->id);
         return $this;
+    }
+
+    public function save()
+    {
+        debug('ddddddddddd');
     }
    
 }

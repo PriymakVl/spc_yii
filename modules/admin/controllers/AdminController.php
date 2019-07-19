@@ -13,20 +13,24 @@ class AdminController extends BaseController
 
 	public $layout = '@layouts/admin';
 
+    public function actionIndex()
+    {
+        if (Yii::$app->user->isGuest) return $this->redirect('/admin/login');
+        else return $this->redirect('/admin/product');
+    }
+
     public function actionLogin()
     {
-    	//if (!Yii::$app->user->isGuest) return $this->redirect(['admin/product']);
-
         $model = new LoginFormAdmin();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) $this->redirect(['admin/product']);
+        if ($model->load(Yii::$app->request->post()) && $model->login()) $this->redirect('/admin/product');
 
-        $model->password = '';
+        //$model->password = '';
         return $this->render('login', ['model' => $model]);
     }
 
     public function actionLogout()
     {
         Yii::$app->user->logout();
-        return $this->redirect(['admin']);
+        return $this->redirect('/admin/login');
     }
 }

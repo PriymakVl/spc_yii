@@ -71,14 +71,8 @@ class ProductAdminController extends BaseController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('update', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save())  return $this->redirect(['view', 'id' => $model->id]);
+        return $this->render('update', compact('model'));
     }
 
 

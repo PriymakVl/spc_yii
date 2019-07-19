@@ -21,17 +21,18 @@ $this->title = 'Админка';
         ],
     ]); ?>
 
-        <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'username')->textInput(['autofocus' => true])->label('Логин') ?>
 
-        <?= $form->field($model, 'password')->passwordInput() ?>
+        <?= $form->field($model, 'password')->passwordInput()->label('Пароль'); ?>
 
-        <?= $form->field($model, 'rememberMe')->checkbox([
-            'template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",
-        ]) ?>
+        <?
+            //$options = ['template' => "<div class=\"col-lg-offset-1 col-lg-3\">{input} {label}</div>\n<div class=\"col-lg-8\">{error}</div>",];
+            //echo $form->field($model, 'rememberMe')->checkbox($options);
+         ?>
 
         <div class="form-group">
             <div class="col-lg-offset-1 col-lg-11">
-                <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                <?= Html::submitButton('Авторизация', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>
 
