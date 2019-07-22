@@ -9,32 +9,15 @@ use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-/**
- * ProductController implements the CRUD actions for Product model.
- */
 class ProductAdminController extends BaseController
 {
 	public $layout = '@layouts/admin';
 	
-    /**
-     * {@inheritdoc}
-     */
     public function behaviors()
     {
-        return [
-            'verbs' => [
-                'class' => VerbFilter::className(),
-                'actions' => [
-                    'delete' => ['POST'],
-                ],
-            ],
-        ];
+        return ['verbs' => ['class' => VerbFilter::className(), 'actions' => ['delete' => ['POST'],],],];
     }
 
-    /**
-     * Lists all Product models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new ProductSearch();
@@ -42,50 +25,47 @@ class ProductAdminController extends BaseController
         return $this->render('index', compact('searchModel', 'dataProvider'));
     }
 
-    /**
-     * Displays a single Product model.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     public function actionView($id)
     {
         $product = $this->findModel($id);
+        // debug($product->category->filters);
         return $this->render('view', ['model' => $product]);
     }
-
 
     public function actionCreate()
     {
         $model = new Product();
-
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-
-        return $this->render('create', [
-            'model' => $model,
-        ]);
+        if ($model->load(Yii::$app->request->post()) && $model->save()) return $this->redirect(['view', 'id' => $model->id]);
+        return $this->render('create', compact('model'));
     }
 
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->save())  return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+            $model->saveProduct(Yii::$app->request->post());
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         return $this->render('update', compact('model'));
     }
 
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $product = (new Product)->set($id);
+        exit('not method');
+        // $product->status = Product::STATUS_INACTIVE;
+        // $prdouct->save(); 
+        //to do method delete with delete filters;
         return $this->redirect(['index']);
     }
 
     protected function findModel($id)
     {
         $product = Product::find()->where(['id' => $id, 'status' => Product::STATUS_ACTIVE])->limit(1)->one();
-        if ($product !== null) return $product->getPrice()->getCategory()->getImage();
-        throw new NotFoundHttpException('The requested page does not exist.');
+        if ($product === null) throw new NotFoundHttpException('The requested page does not exist.');
+        $product->getPrice()->getCategory()->getImage();
+        $product->category->getFilters();//->getFiltersList()f;
+        return $product;
     }
 }

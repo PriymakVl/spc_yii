@@ -31,19 +31,11 @@ class CategoryAdminController extends BaseController
         ];
     }
 
-    /**
-     * Lists all Category models.
-     * @return mixed
-     */
     public function actionIndex()
     {
         $searchModel = new CategorySearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        return $this->render('index', compact('searchModel', 'dataProvider'));
     }
 
     /**
@@ -54,9 +46,8 @@ class CategoryAdminController extends BaseController
      */
     public function actionView($id)
     {
-        return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+        $model = $this->findModel($id)->convertFiltersToList();
+        return $this->render('view', compact('model'));
     }
 
     /**
@@ -120,10 +111,7 @@ class CategoryAdminController extends BaseController
      */
     protected function findModel($id)
     {
-        if (($model = Category::findOne($id)) !== null) {
-            return $model;
-        }
-
-        throw new NotFoundHttpException('The requested page does not exist.');
+        if (($model = Category::findOne($id)) === null) throw new NotFoundHttpException('Такой категории не существует.');
+        return $model->getParent();
     }
 }

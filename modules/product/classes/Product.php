@@ -50,9 +50,21 @@ class Product extends ProductBase {
         return $this;
     }
 
-    public function save()
+    public function saveProduct($post)
     {
-        debug('ddddddddddd');
+        $product = (object) $post['Product'];
+        $this->name = $product->name;
+        $this->preview = $product->preview;
+        $this->description = $product->description;
+        $this->updatePrice();
+        $this->save();
+    }
+
+    private function updatePrice()
+    {
+        $price = (new ProductPrice)->selectByIdProduct($this->id);
+        $price->value = $product->price;
+        $price->save();
     }
    
 }

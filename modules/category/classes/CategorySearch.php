@@ -18,7 +18,7 @@ class CategorySearch extends Category
     {
         return [
             [['id', 'id_parent', 'status'], 'integer'],
-            [['name', 'full_name', 'description'], 'safe'],
+            [['name', 'description'], 'safe'],
         ];
     }
 
@@ -62,7 +62,6 @@ class CategorySearch extends Category
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'full_name', $this->full_name])
             ->andFilterWhere(['like', 'description', $this->description]);
 
         return $dataProvider;

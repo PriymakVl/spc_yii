@@ -27,7 +27,6 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            'full_name',
             ['attribute' => 'id_parent', 
                 'value' => function($model) {return Category::findOne($model->id_parent)->name;}, 
                 'filter' => (new Category)->getForSelect(),

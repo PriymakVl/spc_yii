@@ -16,16 +16,14 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'full_name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'id_parent')->textInput() ?>
+    <!-- filters -->
+    <?=$form->field($model, 'filters')->dropDownList([$model->getFilters()]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
 
-    <?= $form->field($model, 'id_parent')->textInput() ?>
-
-    <?= $form->field($model, 'status')->textInput() ?>
-
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

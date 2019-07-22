@@ -12,6 +12,7 @@ class Category extends CategoryBase {
 	public $products;
 	public $children;
 	public $image;
+	public $filters_list;
 
 	public function getProducts()
 	{
