@@ -59,6 +59,7 @@ class CategorySearch extends Category
             'id' => $this->id,
             'id_parent' => $this->id_parent,
             'status' => $this->status,
+            'IBLOCK_ID' => [14], //32
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])

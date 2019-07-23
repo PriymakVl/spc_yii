@@ -60,7 +60,7 @@ class ProductSearch extends Product
             'id' => $this->id,
             'id_cat' => $this->id_cat,
             'status' => Product::STATUS_ACTIVE,
-            'IBLOCK_ID' => [14, 32],
+            'IBLOCK_ID' => [14], //32
         ]);
 
         $query->andFilterWhere(['like', 'code', $this->name])

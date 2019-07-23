@@ -11,9 +11,6 @@ class ModelBase extends ActiveRecord {
     const STATUS_ACTIVE = 1;
     const STATUS_UNACTIVE = 0;
 
-    public $children;
-    public $parent;
-
     public function get($id)
     {
         $object =  static::find()->where(['id' => $id, 'status' => static::STATUS_ACTIVE])->limit(1)->one();
@@ -33,19 +30,17 @@ class ModelBase extends ActiveRecord {
 
     public function getChildren()
     {
-    	$this->children = $this->getByIdParentModel($this->id);
-    	return $this;
+    	return $this->selectByIdParent($this->id);
     }
 
     public function getParent()
     {
-        if ($this->id_parent) $this->parent = $this->get($this->id_parent);
-        return $this;
+        if ($this->id_parent) return $this->get($this->id_parent);
     }
 
-    public function getByIdParentModel($id_parent = false)
+    public function selectByIdParent($id_parent = false)
     {
-        $id_parent = ($id_parent === false) ? $this->id_parent : $id_parent; 
+        $id_parent = $id_parent ?  $id_parent : $this->id_parent; 
     	return self::find()->where(['id_parent' => $id_parent, 'status' => self::STATUS_ACTIVE])->all();
     }
 

@@ -11,8 +11,6 @@ use app\modules\category\traits\CategoryConvert;
 class CategoryBase extends ModelBase {
 
 	use CategoryList, CategoryModel, CategoryConvert;
-   
-    public $image;
     
     public static function tableName()
     {
@@ -25,7 +23,7 @@ class CategoryBase extends ModelBase {
             'name' => 'Название',
             'id_parent' => 'Родитель',
             'description' => 'Описание',
-            'filters' => 'Фильтры',
+            'filters' => '',
         ];
     }
 

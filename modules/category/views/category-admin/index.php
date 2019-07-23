@@ -29,7 +29,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'name',
             ['attribute' => 'id_parent', 
                 'value' => function($model) {return Category::findOne($model->id_parent)->name;}, 
-                'filter' => (new Category)->getForSelect(),
+                'filter' => Category::find()->select(['name'])->where(['id_parent' => null, 'status' => Category::STATUS_ACTIVE])->asArray()->indexBy('id')->column(),
             ],
             //'status',
 

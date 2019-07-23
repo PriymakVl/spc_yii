@@ -6,36 +6,31 @@ use app\modules\category\classes\CategoryBase;
 use app\modules\product\classes\Product;
 use app\models\Image;
 use app\models\Filter;
+use app\modules\category\classes\CategoryFilter;
 
 class Category extends CategoryBase {
 
-	public $products;
-	public $children;
-	public $image;
-	public $filters_list;
-
 	public function getProducts()
 	{
-		$this->products = (new Product)->selectByIdCategory($this->id);
-		if ($this->products) $this->callMethods($this->products, ['getImage', 'getPrice']);
-		return $this;
+		$products = (new Product)->selectByIdCategory($this->id);
+		if ($products) $this->callMethods($this->products, ['getImage', 'getPrice']);
+		return $products;
 	}
 
 	public function getChildren()
 	{
-		$this->children = $this->selectByIdParent($this->id);
-		return $this;
+		return $this->selectByIdParent($this->id);
 	}
 
     public function getImage()
     {
-        $this->image = (new Image)->get($this->id_img);
-        return $this;
+        return (new Image)->get($this->id_img);
     }
 
     public function getFilters()
     {
-    	return (new Filter)->getForCategory($this->id);
+    	$ids = CategoryFilter::find()->select(['id_filter'])->where(['id_cat' => $this->id, 'status' => self::STATUS_ACTIVE])->asArray()->column();
+    	return Filter::findAll([id => $ids, 'status' => self::STATUS_ACTIVE]);
     }
    
 }
