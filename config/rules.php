@@ -10,5 +10,7 @@ return [
 	'contacts' => 'main/contacts',
 	'sale' => 'main/sale',
 	'search' => 'product/product/search',
-	'filter' => 'category/category/filter',
+	//admin filters
+	'admin/filters' => 'filter/filter-admin/index',
+	'admin/filter/category' => 'filter/filter-admin/category',
 ];

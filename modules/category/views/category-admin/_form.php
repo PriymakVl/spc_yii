@@ -2,7 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
-use app\models\Filter;
+use app\modules\filter\Filter;
 ?>
 <!-- css -->
 <link rel="stylesheet" href="/web/css/admin/form.css">

@@ -2,23 +2,19 @@
 
 namespace app\modules\category\traits;
 
-use app\models\Filter;
+use app\modules\filter\Filter;
 use yii\helpers\ArrayHelper;
 
 trait CategoryConvert {
 
     public function convertFiltersToList()
     {
-        $filters = (new Filter)->selectByIdCategory($this->id);
-        debug($filters);
-        if (!$filters) return;
-        $this->filters_list = '<ol>';
-        foreach ($filters as $name) {
-            $filter = (new Filter)->selectByName($name);
-            $this->filters_list .= '<li>'.$filter->title.'</li>';
+        if (!$this->filters) return;
+        $list = '<ol>';
+        foreach ($this->filters as $filter) {
+            $list .= '<li>'.$filter->title.'</li>';
         }
-        $this->filters_list .= '</ol>';
-        return $this;
+        return $list .= '</ol>';
     }
 
     public function convertForSelectMain()

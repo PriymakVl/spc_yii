@@ -15,4 +15,9 @@
             'class' => 'app\modules\admin\AdminModule',
             'defaultRoute' => 'admin/login'
         ],
+
+        'filter' => [
+            'class' => 'app\modules\filter\FilterModule',
+            'defaultRoute' => 'admin/filter'
+        ],
     ];

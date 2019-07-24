@@ -1,13 +1,12 @@
 <?php
 
-namespace app\models;
+namespace app\modules\filter\classes;
 
 use app\models\ModelBase;
 use app\modules\category\classes\CategoryFilter;
+use app\modules\filter\classes\FilterItem;
 
 class Filter extends ModelBase {
-
-	public $items;
 
 	public static function tableName()
     {
@@ -27,13 +26,26 @@ class Filter extends ModelBase {
 
     public function getItems()
     {
-    	$this->items = (new FilterItem)->selectByIdFilter($this->id);
-    	return $this;
+    	return (new FilterItem)->selectByIdFilter($this->id);
     }
 
     public function selectByName($name)
     {
     	return self::find()->where(['name' => $name,  'status' => self::STATUS_ACTIVE])->limit(1)->one();
+    }
+
+    public function saveFilter($form)
+    {
+        $this->name = strtolower(trim($form->name));
+        $this->title = trim($form->title);
+        $this->save();
+    }
+
+     public function rules()
+    {
+        return [
+            [['name', 'title'], 'required'],
+        ];
     }
    
 }

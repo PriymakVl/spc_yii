@@ -5,7 +5,7 @@ namespace app\widgets;
 use Yii;
 use yii\base\Widget;
 use app\modules\category\classes\Category;
-use app\models\Filter;
+use app\modules\filter\Filter;
 
 class FilterWidget extends Widget {
 

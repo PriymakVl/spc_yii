@@ -1,6 +1,6 @@
 <?php
 
-namespace app\modules\filter;
+namespace app\modules\filter\classes;
 
 use app\models\ModelBase;
 

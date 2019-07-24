@@ -41,6 +41,7 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Категории', 'url' => ['/admin/category']],
             ['label' => 'Продукты', 'url' => ['/admin/product']],
+            ['label' => 'Фильтры', 'url' => ['/admin/filters']],
             Yii::$app->user->isGuest ? ['label' => ''] : ['label' => 'Выход', 'url' => ['/admin/logout']],
         ],
     ]);

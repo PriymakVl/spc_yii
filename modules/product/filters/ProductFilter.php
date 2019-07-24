@@ -2,7 +2,7 @@
 
 namespace app\modules\product\filters;
 
-use app\models\Filter;
+use app\modules\filter\Filter;
 use app\models\FilterItem;
 
 trait ProductFilter {

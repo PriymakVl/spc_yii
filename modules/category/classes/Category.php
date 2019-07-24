@@ -5,7 +5,7 @@ namespace app\modules\category\classes;
 use app\modules\category\classes\CategoryBase;
 use app\modules\product\classes\Product;
 use app\models\Image;
-use app\models\Filter;
+use app\modules\filter\classes\Filter;
 use app\modules\category\classes\CategoryFilter;
 
 class Category extends CategoryBase {

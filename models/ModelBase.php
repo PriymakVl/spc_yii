@@ -9,7 +9,7 @@ class ModelBase extends ActiveRecord {
 
     const ID_PARENT_MAIN = 0;
     const STATUS_ACTIVE = 1;
-    const STATUS_UNACTIVE = 0;
+    const STATUS_INACTIVE = 0;
 
     public function get($id)
     {

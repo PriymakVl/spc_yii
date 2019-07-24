@@ -1,15 +1,15 @@
 <?php
 
-namespace app\modules\category\controllers;
+namespace app\modules\filter\controllers;
 
 use Yii;
-use app\modules\category\classes\Category;
-use app\modules\category\classes\CategorySearch;
+use app\modules\filter\classes\Filter;
+use app\modules\filter\classes\FilterSearch;
 use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
-class CategoryAdminController extends BaseController
+class FilterAdminController extends BaseController
 {
     public $layout = '@layouts/admin';
 
@@ -30,7 +30,7 @@ class CategoryAdminController extends BaseController
 
     public function actionIndex()
     {
-        $searchModel = new CategorySearch();
+        $searchModel = new FilterSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', compact('searchModel', 'dataProvider'));
     }
@@ -43,9 +43,9 @@ class CategoryAdminController extends BaseController
 
     public function actionCreate()
     {
-        $model = new Category();
+        $model = new Filter();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveCategory();
+            $model->saveFilter((object)Yii::$app->request->post('Filter'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', compact('model'));
@@ -55,8 +55,7 @@ class CategoryAdminController extends BaseController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            debug(Yii::$app->request->post());
-            //$model->saveCategory();
+            $model->saveFilter((object)Yii::$app->request->post('Filter'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('update', compact('model'));
@@ -64,15 +63,16 @@ class CategoryAdminController extends BaseController
 
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+        $model = $this->findModel($id);
+        $model->status = Filter::STATUS_INACTIVE;
+        $model->save();
         return $this->redirect(['index']);
     }
 
     protected function findModel($id)
     {
-        $model = Category::findOne($id);
-        if ($model === null) throw new NotFoundHttpException('Такой категории не существует.');
+        $model = Filter::findOne(['id' => $id, 'status' => Filter::STATUS_ACTIVE]);
+        if ($model === null) throw new NotFoundHttpException('Такого фильтра не существует.');
         return $model;
     }
 }

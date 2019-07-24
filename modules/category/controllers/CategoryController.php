@@ -8,7 +8,7 @@
 	use app\controllers\BaseController;
 	use yii\data\Pagination;
 	use app\helpers\Helper;
-	use app\models\Filter;
+	use app\modules\filter\Filter;
 	
 class CategoryController extends BaseController {
 
