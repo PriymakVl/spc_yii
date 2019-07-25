@@ -3,7 +3,7 @@
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
-$this->title = 'Фильтр: ' . $model->title;
+$this->title = $model->title;
 //$this->params['breadcrumbs'][] = ['label' => 'Categories', 'url' => ['index']];
 //$this->params['breadcrumbs'][] = $this->title;
 
@@ -13,7 +13,7 @@ $this->title = 'Фильтр: ' . $model->title;
 
 <div class="category-view">
 
-    <h1><?=$this->title?></h1>
+    <h1>Фильтр: <span class="text-success"><?=$this->title?></span></h1>
 
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>

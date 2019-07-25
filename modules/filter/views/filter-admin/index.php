@@ -18,13 +18,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
+        'dataProvider' => $filter->items,
         //'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
-            'name',
-            'title',
-            ['class' => 'yii\grid\ActionColumn'],
+            ['attribute' => 'title', 'label' => 'Название'],
+            ['class' => 'yii\grid\ActionColumn', 'header' => 'Операции'],
         ],
     ]); ?>
 

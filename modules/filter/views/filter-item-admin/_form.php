@@ -12,13 +12,18 @@ use yii\widgets\ActiveForm;
     <!-- filter name -->
     <?= $form->field($model, 'name')->textInput()->label('Название') ?>
 
-    <!-- filter title  -->
-    <?= $form->field($model, 'title')->textInput()->label('Заголовок') ?>
+    <!-- filter rating -->
+    <?= $form->field($model, 'rating')->textInput()->label('Рейтинг') ?>
+
+    <!-- filter id -->
+    <? if (!$model->id_filter): ?>
+        <?= $form->field($model, 'id_filter')->hiddenInput(['value' => Yii::$app->get('id_filter')]) ?>
+    <? endif; ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
         <? if ($model->id): ?>
-            <?= Html::a('Отменить', ['filter-item-admin/view', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Отменить', ['filter-item-admin/view', 'id_item' => $model->id], ['class' => 'btn btn-primary']) ?>
         <? else: ?>
             <?= Html::a('Отменить', ['filter-item-admin/index'], ['class' => 'btn btn-primary']) ?>
         <? endif; ?>

@@ -38,10 +38,10 @@ class Filter extends ModelBase {
     {
         $this->name = strtolower(trim($form->name));
         $this->title = trim($form->title);
-        $this->save();
+        return $this->save();
     }
 
-     public function rules()
+    public function rules()
     {
         return [
             [['name', 'title'], 'required'],

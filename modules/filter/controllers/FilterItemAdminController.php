@@ -15,50 +15,57 @@ class FilterItemAdminController extends BaseController
 
     public function actionIndex($id_filter)
     {
-        $params = ['id_filter' => $id_filter, 'status' => FilterItem::STATUS_ACTIVE];
-        $items = FilterItem::find()->where($params)->orderBy(['rating' => SORT_DESC])->all();
-        debug(count($items));
-        return $this->render('index', compact('items'));
+        $filter = (new Filter)->get($id_filter);
+        return $this->render('index', compact('filter'));
     }
 
-    public function actionView($id)
+    public function actionView($id_item)
     {
-        $model = $this->findModel($id);
+        $model = $this->findModel($id_item);
         return $this->render('view', compact('model'));
     }
 
-    public function actionCreate()
+    public function actionCreate($id_filter)
     {
-        $model = new Filter();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveFilter((object)Yii::$app->request->post('Filter'));
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
-        return $this->render('create', compact('model'));
+        $filter = (new Filter)->get($id_filter);
+        $model = new FilterItem();
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) $this->saveModel($model, 'create');
+        return $this->render('create', compact('model', 'filter'));
     }
 
-    public function actionUpdate($id)
+    public function actionUpdate($id_item)
     {
-        $model = $this->findModel($id);
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveFilter((object)Yii::$app->request->post('Filter'));
-            return $this->redirect(['view', 'id' => $model->id]);
-        }
+        $model = $this->findModel($id_item);
+        if ($model->load(Yii::$app->request->post()) && $model->validate()) $this->saveModel($model, 'update');
         return $this->render('update', compact('model'));
     }
 
-    public function actionDelete($id)
+    public function actionDelete($id_item)
     {
-        $model = $this->findModel($id);
-        $model->status = Filter::STATUS_INACTIVE;
-        $model->save();
-        return $this->redirect(['index']);
+        $model = $this->findModel($id_item);
+        $model->status = FilterItem::STATUS_INACTIVE;
+        if ($model->save()) Yii::$app->session->setFlash('success', "Элемент фильтра успешно удален");
+        else Yii::$app->session->setFlash('error', "Ошибка при удалении элемента фильтра"); 
+        return $this->redirect(['index', 'id_filter' => $model->filter->id]);
     }
 
     protected function findModel($id)
     {
-        $model = Filter::findOne(['id' => $id, 'status' => Filter::STATUS_ACTIVE]);
-        if ($model === null) throw new NotFoundHttpException('Такого фильтра не существует.');
+        $model = FilterItem::findOne(['id' => $id, 'status' => Filter::STATUS_ACTIVE]);
+        if ($model === null) throw new NotFoundHttpException('Такого элемента фильтра не существует.');
         return $model;
+    }
+
+    protected function saveModel($model, $action)
+    {
+        if ($model->saveFilterItem((object)Yii::$app->request->post('FilterItem'))) {
+            $action_str = ($action == 'update') ? 'отредактирован' : 'создан';
+            Yii::$app->session->setFlash('success', "Элемент фильтра успешно {$action_str}");
+        }
+        else {
+            $action_str = ($action == 'update') ? 'редактировании' : 'создании';
+            Yii::$app->session->setFlash('error', "Ошибка при {$action_str} элемента фильтра"); 
+        }
+        return $this->redirect(['view', 'id_item' => $model->id]);
     }
 }
