@@ -26,7 +26,7 @@ class FilterItem extends ModelBase {
         return [
             ['name', 'required'],
             ['rating', 'integer'],
-            ['id_filter', 'save'],
+            ['id_filter', 'integer'],
         ];
     }
 

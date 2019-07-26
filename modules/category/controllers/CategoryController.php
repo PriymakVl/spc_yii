@@ -15,8 +15,8 @@ class CategoryController extends BaseController {
 
 	public function actionIndex($id_cat)
 	{
-		$cat = (new Category)->get($id_cat)->getChildren()->getParent();
-		$query = Product::find()->where(['id_cat' => $id_cat, status => Product::STATUS_ACTIVE]);
+		$cat = (new Category)->get($id_cat);
+		$query = Product::find()->where(['id_cat' => $id_cat, status => self::STATUS_ACTIVE]);
 		$pages = new Pagination(['defaultPageSize' => 6, 'totalCount' => $query->count()]);
 		$products = $query->offset($pages->offset)->limit($pages->limit)->all();
 		if ($products) $products = Helper::callMethods($products, ['getImage', 'getPrice']);
@@ -25,7 +25,7 @@ class CategoryController extends BaseController {
 
 	public function actionFilter($id_cat)
     {
-    	$cat = (new Category)->get($id_cat)->getChildren()->getParent();
+    	$cat = (new Category)->get($id_cat);
         $products = (new Product)->filter($id_cat);
         return $this->render('index/main', compact('cat', 'products'));
     }

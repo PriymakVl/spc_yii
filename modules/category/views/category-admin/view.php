@@ -29,7 +29,7 @@ $this->title = $model->name;
                 'method' => 'post',
             ],
         ]) ?>
-        <?= Html::a('Фильтры', ['/admin/filter'], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Фильтры', ['category-admin/filters', 'id_cat' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

@@ -5,6 +5,8 @@ namespace app\modules\category\controllers;
 use Yii;
 use app\modules\category\classes\Category;
 use app\modules\category\classes\CategorySearch;
+use app\modules\category\classes\CategoryFilter;
+use app\modules\filter\classes\Filter;
 use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,18 +57,31 @@ class CategoryAdminController extends BaseController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            debug(Yii::$app->request->post());
-            //$model->saveCategory();
+            $model->saveCategory((object)Yii::$app->request->post('Category'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('update', compact('model'));
     }
 
-    public function actionDelete($id)
+    public function actionDelete($id_cat)
     {
-        $this->findModel($id)->delete();
-
+        $cat = Category::findOne($id_cat);
+        $cat->status = self::STATUS_INACTIVE;
+        $cat->save();
         return $this->redirect(['index']);
+    }
+
+    public function actionFilters($id_cat)
+    {
+        $cat_filters = CategoryFilter::find()->select('id_filter')->where(['id_cat' => $id_cat, 'status' => self::STATUS_ACTIVE])->column();
+        $all_filters = Filter::findAll(['status' => self::STATUS_ACTIVE]);
+        $cat = Category::findOne($id_cat);
+        return $this->render('filters', compact('cat_filters', 'all_filters', 'cat'));
+    }
+
+    public function actionSaveFilters()
+    {
+        if (CategoryFilter::saveFilters((object)$_GET)) debug('yes');
     }
 
     protected function findModel($id)

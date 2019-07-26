@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <!-- filter id -->
     <? if (!$model->id_filter): ?>
-        <?= $form->field($model, 'id_filter')->hiddenInput(['value' => Yii::$app->get('id_filter')]) ?>
+        <?= $form->field($model, 'id_filter')->hiddenInput(['value' => $filter->id])->label(false) ?>
     <? endif; ?>
 
     <div class="form-group">

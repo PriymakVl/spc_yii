@@ -32,5 +32,22 @@ class Category extends CategoryBase {
     	$ids = CategoryFilter::find()->select(['id_filter'])->where(['id_cat' => $this->id, 'status' => self::STATUS_ACTIVE])->asArray()->column();
     	return Filter::findAll([id => $ids, 'status' => self::STATUS_ACTIVE]);
     }
+
+    public function saveCategory($form)
+    {
+    	$this->name = $form->name;
+    	$this->id_parent = $form->id_parent;
+    	$this->description = $form->description;
+    	$this->save();
+    }
+
+    public function rules()
+    {
+    	return [
+    		[['name', 'description'], 'string'],
+    		['id_parent', 'integer'],
+    		['name', 'required'],
+    	];
+    }
    
 }

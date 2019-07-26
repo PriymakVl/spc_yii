@@ -12,6 +12,9 @@ class BaseController extends Controller {
 	public $post;
 	public $request;
 
+	const STATUS_ACTIVE = 1;
+	const STATUS_INACTIVE = 0;
+
 	public function  init()
 	{
 		$this->get = new Request($_GET);
