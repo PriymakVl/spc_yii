@@ -79,9 +79,11 @@ class CategoryAdminController extends BaseController
         return $this->render('filters', compact('cat_filters', 'all_filters', 'cat'));
     }
 
-    public function actionSaveFilters()
+    public function actionSaveFilters($id_cat)
     {
-        if (CategoryFilter::saveFilters((object)$_GET)) debug('yes');
+        if (CategoryFilter::saveFilters((object)$_GET)) Yii::$app->session->setFlash('success', "Филтры успешно добавлены в категорию");
+        else Yii::$app->session->setFlash('error', "Ошибка при добавлении фильтров в категорию");
+        return $this->redirect(['category-admin/view', 'id' => $id_cat]);
     }
 
     protected function findModel($id)

@@ -3,7 +3,7 @@
 namespace app\modules\product\classes;
 
 use app\models\ModelBase;
-use app\modules\filter\Filter;
+use app\modules\filter\classes\Filter;
 
 class ProductItemFilter extends ModelBase {
 

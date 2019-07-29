@@ -31,16 +31,18 @@ $this->title = 'Продукты';
             //'id',
             'name',
             //'description:ntext',
-            ['attribute' => 'price', 'label' => 'Цена', 'value'=> function ($model) {return (new ProductPrice)->selectByIdProduct($model->id)->value;}],
+            ['attribute' => 'price', 'header' => 'Цена', 'headerOptions' => ['class' => 'text-info'], 'value'=> function ($model) {return (new ProductPrice)->selectByIdProduct($model->id)->value;}],
             ['attribute' => 'id_cat', 
             'value' => function($model) {return Category::findOne($model->id_cat)->name;}, 
-           // 'filter' => (new Category)->getForSelect()
+            'filter' => (new Category)->convertForSelectMainWithSubcategory(),
             ],
-            'IBLOCK_ID',
+            // 'IBLOCK_ID',
             //'status',
 
-            ['class' => 'yii\grid\ActionColumn', ], //'template' => '{delete}'
-        ],
+            ['class' => 'yii\grid\ActionColumn', 'contentOptions' => ['style' => 'width:100px;'],
+            'headerOptions' => ['class' => 'text-info'], 'header' => 'Операции',
+            ], //'template' => '{delete}'
+        ]
     ]); ?>
 
 

@@ -9,14 +9,12 @@ use app\modules\category\classes\Category;
 use app\models\Image;
 use app\modules\product\classes\ProductPrice;
 use app\modules\product\traits\ProductAdminTrait;
+use app\modules\filter\classes\FilterItem;
 
 class Product extends ProductBase {
 
 	use ProductModel, ProductFilter, ProductAdminTrait;
 
-    public $category;
-    public $image;
-    public $price;
     public $itemsFilters;
 
  	public function delete()
@@ -28,23 +26,20 @@ class Product extends ProductBase {
 
     public function getCategory()
     {
-        $this->category = (new Category)->get($this->id_cat);
-        return $this;
+        return (new Category)->get($this->id_cat);
     }
 
     public function getImage()
     {
-        $this->image = (new Image)->get($this->id_img);
-        return $this;
+        return (new Image)->get($this->id_img);
     }
 
     public function getPrice()
     {
-        $this->price = (new ProductPrice)->selectByIdProduct($this->id);
-        return $this;
+        return (new ProductPrice)->selectByIdProduct($this->id);
     }
 
-    public function getItemsOfFilters()
+    public function getItemsFilters()
     {
         $this->itemsFilters = (new ProductItemFilter)->getAll($this->id);
         return $this;
@@ -65,6 +60,13 @@ class Product extends ProductBase {
         $price = (new ProductPrice)->selectByIdProduct($this->id);
         $price->value = $product->price;
         $price->save();
+    }
+
+    public function getItemFilter($id_filter)
+    {
+        $item = ProductItemFilter::find()->where(['id_prod' => $this->id, 'id_filter' => $id_filter])->limit(1)->one();
+        if (!$item) return;
+        return FilterItem::findOne($item->id);
     }
    
 }
