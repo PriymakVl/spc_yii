@@ -6,6 +6,8 @@ use Yii;
 use app\modules\product\classes\Product;
 use app\modules\product\classes\ProductItemFilter;
 use app\modules\product\classes\ProductSearch;
+use app\modules\filter\classes\Filter;
+use app\modules\filter\classes\FilterItem;
 use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -22,6 +24,7 @@ class ProductAdminController extends BaseController
     public function actionIndex()
     {
         $searchModel = new ProductSearch();
+        // debug(Yii::$app->request->queryParams);
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
         return $this->render('index', compact('searchModel', 'dataProvider'));
     }
@@ -63,6 +66,8 @@ class ProductAdminController extends BaseController
     public function actionFilters($id_prod)
     {
         $product = $this->findModel($id_prod);
+        $item = ProductItemFilter::findOne(['id_prod' => $id_prod, 'id_filter' => 2]);
+        $fil_item = FilterItem::findOne($item->id_item);
         $prod_filters = ProductItemFilter::find()->select('id_filter')->where(['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE])->column();
         return $this->render('filters', compact('product', 'prod_filters'));
     }
@@ -71,10 +76,11 @@ class ProductAdminController extends BaseController
     {
         $filter = Filter::findOne($id_filter);
         $product = Product::findOne($id_prod);
-        $model = new ProductItemFilter();
-        if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveProduct(Yii::$app->request->post());
-            return $this->redirect(['view', 'id' => $model->id]);
+        $model = ProductItemFilter::findOne(['id_prod' => $id_prod, 'id_filter' => $id_filter]);
+        if (!$model) $model = new ProductItemFilter();
+        if ($model->load(Yii::$app->request->post()) && $model->saveItem((object)Yii::$app->request->post('ProductItemFilter'))) {
+            Yii::$app->session->setFlash('success', "Элемент фильтра успешно изменен");
+            return $this->redirect(['filters', 'id_prod' => $id_prod]);
         }
         return $this->render('update_filter', compact('filter', 'product', 'model'));
     }

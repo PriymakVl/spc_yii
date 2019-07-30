@@ -30,6 +30,12 @@ class CategoryAdminController extends BaseController
         ];
     }
 
+    public function actionMain()
+    {
+        $cats = Category::findAll(['id_parent' => null, 'status' => self::STATUS_ACTIVE]);
+        return $this->render('main', compact('cats'));
+    }
+
     public function actionIndex()
     {
         $searchModel = new CategorySearch();

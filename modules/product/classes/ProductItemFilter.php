@@ -27,5 +27,13 @@ class ProductItemFilter extends ModelBase {
     {
         return self::find()->where(['id_prod' => $id_prod, 'status' => self::STATUS_ACTIVE])->asArray()->all();
     }
+
+    public function saveItem($form)
+    {
+        $this->id_prod = $form->id_prod;
+        $this->id_filter = $form->id_filter;
+        $this->id_item = $form->id_item;
+        return $this->save();
+    }
    
 }

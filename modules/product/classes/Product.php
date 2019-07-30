@@ -16,6 +16,8 @@ class Product extends ProductBase {
 	use ProductModel, ProductFilter, ProductAdminTrait;
 
     public $itemsFilters;
+    public $price;
+    public $currency;
 
  	public function delete()
     {
@@ -66,7 +68,7 @@ class Product extends ProductBase {
     {
         $item = ProductItemFilter::find()->where(['id_prod' => $this->id, 'id_filter' => $id_filter])->limit(1)->one();
         if (!$item) return;
-        return FilterItem::findOne($item->id);
+        return FilterItem::findOne($item->id_item);
     }
    
 }

@@ -27,7 +27,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-
+    <!-- price -->
     <div class="form-price-wrp">
         <?= $form->field($model, 'price')->textInput(['value' => $model->price->value]) ?>
         <?= $form->field($model, 'currency')->textInput(['value' => $model->price->currency]) ?>
