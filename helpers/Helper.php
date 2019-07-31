@@ -20,4 +20,15 @@ class Helper {
         }
         return $object;
     }
+
+    public static function getProperties($objects, $name_prop)
+    {
+        if (!$objects) return;
+        $properties = [];
+        foreach ($objects as $object) {
+            if (empty($object->$name_prop)) continue;
+            $properties[] = $object->$name_prop;
+        }
+        return $properties;
+    }
 }

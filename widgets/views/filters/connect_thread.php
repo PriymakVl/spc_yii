@@ -1,6 +1,6 @@
 <?
 
-	$filter = (new app\modules\filter\Filter)->selectByName('connect_thread')->getItems();
+	$filter = (new app\modules\filter\classes\Filter)->selectByName('connect_thread');
 ?>
 
 <section>

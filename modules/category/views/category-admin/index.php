@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
-            ['attribute' => 'id_parent', 
+            ['attribute' => 'id_parent', 'label' => 'Главные категории',
                 'value' => function($model) {return Category::findOne($model->id_parent)->name;}, 
                 'filter' => Category::find()->select(['name'])->where(['id_parent' => null, 'status' => Category::STATUS_ACTIVE])->asArray()->indexBy('id')->column(),
             ],

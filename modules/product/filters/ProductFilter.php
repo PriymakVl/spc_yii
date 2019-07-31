@@ -4,23 +4,28 @@ namespace app\modules\product\filters;
 
 use app\modules\filter\Filter;
 use app\models\FilterItem;
+use app\helpers\Helper;
 
 trait ProductFilter {
 
-	public function filter($id_cat)
+	public function filter($cat)
 	{
-		$products = self::find()->where(['id_cat' => $id_cat, status => self::STATUS_ACTIVE])->all();
+		if ($cat->children) $products = self::find()->where(['id_cat' => Helper::getProperties($cat->children, 'id'), 'status' => self::STATUS_ACTIVE])->all();
+		else $products = self::find()->where(['id_cat' => $id_cat, status => self::STATUS_ACTIVE])->all();
 		if (!$products) return;
-		$this->callMethods($products, ['getItemsOfFilters']);
-		$products = $this->applyFilters($products);
-		if ($products) return $this->callMethods($products, ['getImage', 'getPrice']);
+		$this->callMethods($products, ['getItemsFilters']);
+		return $this->applyFilters($products);
 	}
 
 	private function applyFilters($products)
 	{
 			$products = $this->filterPrice($products);
 			if (!$products) return;
-			$products = empty($_GET['connect_thread']) ? $products : $this->selectProducts($products, 'connect_thread');
+			foreach ($_GET as $name => $value) {
+				if ($name == 'min_price' || $name == 'max_price' || $name == 'id_cat') continue;
+				if (!$products) break;
+				$products = $this->selectProducts($products, $name);
+			}
 			return $products;
 	}
 
@@ -46,10 +51,14 @@ trait ProductFilter {
 	private function selectProducts($products, $filter_name)
 	{
 		$result = [];
+		// debug($_GET, false);
 		foreach ($products as $product) {
+			// if ($product->itemsFilters) debug($product->itemsFilters, false);
 			if (empty($product->itemsFilters[$filter_name])) continue;
 			if (in_array($product->itemsFilters[$filter_name], $_GET[$filter_name])) $result[] = $product;
 		}
+		// debug(count($result));
+		// exit('end');
 		return $result;
 	}
 

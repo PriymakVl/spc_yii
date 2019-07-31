@@ -16,8 +16,6 @@ class Product extends ProductBase {
 	use ProductModel, ProductFilter, ProductAdminTrait;
 
     public $itemsFilters;
-    public $price;
-    public $currency;
 
  	public function delete()
     {

@@ -4,7 +4,7 @@
 ?>
 <section class="filter-price">
 	<h3>
-		<span><?=$filter->title?></span>
+		<span>Цена</span>
 		<i class="fas fa-angle-up"></i>
 	</h3>
 	<div class="filter-content-wrp">

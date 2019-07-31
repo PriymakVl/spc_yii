@@ -14,6 +14,7 @@ use app\models\ModelBase;
  * @property string $price
  * @property int $id_cat
  * @property int $status
+ * @property string price
  */
 
 class ProductBase extends ModelBase {
@@ -30,7 +31,7 @@ class ProductBase extends ModelBase {
             [['description'], 'string'],
             [['id_cat', 'status'], 'integer'],
             [['name'], 'string', 'max' => 255],
-            [['price'], 'string', 'max' => 100],
+            //[['price'], 'string', 'max' => 100],
         ];
     }
 

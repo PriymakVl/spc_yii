@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Widget;
 use app\modules\category\classes\Category;
 use app\modules\filter\Filter;
+use yii\helpers\ArrayHelper;
 
 class FilterWidget extends Widget {
 
@@ -13,19 +14,20 @@ class FilterWidget extends Widget {
 	public function run()
 	{
 		$id_cat = Yii::$app->request->get('id_cat');
-		$filters = (new Category)->get($id_cat)->getFilters();
+		$cat = (new Category)->get($id_cat);
+		$filters = $this->createFiltersNamesArray($cat->filters);
 		return $this->render('filters/main', compact('filters'));
 	}
 
-	// private function createFiltersHtml($filters_cat)
-	// {
-	// 	$filters_names = Filter::getAllNames();
-	// 	$filters_html = '';
-	// 	foreach ($filters_names as $name) {
-	// 		if (in_array($name, $filters_cat)) $filters_html .= file('')
-	// 	}
-		
-	// }
+	private function createFiltersNamesArray($filters)
+	{
+		if (!$filters) return;
+		$names = [];
+		foreach ($filters as $filter) {
+			$names[] = $filter->name;
+		}
+		return $names;
+	}
 
 
 

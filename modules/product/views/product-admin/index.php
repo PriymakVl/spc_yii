@@ -36,6 +36,8 @@ $this->title = 'Продукты';
             'value' => function($model) {return Category::findOne($model->id_cat)->name;}, 
             'filter' => (new Category)->convertForSelectMainWithSubcategory(),
             ],
+            ['attribute' => 'image', 'label' => 'Изображение', 'format' => 'raw', 
+            'value' => function($model) {return $model->image ? '<a href="/product/product-admin/upload-image"><i class="text-success">есть</i></a>' : '<a href="/product/product-admin/upload-image"><i class="text-danger">нет</i></a>';}],
             // 'IBLOCK_ID',
             //'status',
 

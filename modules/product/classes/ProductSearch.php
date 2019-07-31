@@ -11,9 +11,8 @@ use app\modules\product\classes\Product;
  */
 class ProductSearch extends Product
 {
-    /**
-     * {@inheritdoc}
-     */
+    public $price;
+
     public function rules()
     {
         return [

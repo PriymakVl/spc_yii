@@ -26,6 +26,8 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]) ?>
         <?= Html::a('Фильтры', ['product-admin/filters', 'id_prod' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Изображение', ['product-admin/image', 'id_prod' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Цена', ['product-admin/price', 'id_prod' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([

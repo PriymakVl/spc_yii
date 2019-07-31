@@ -1,10 +1,16 @@
 <div class="filters-wrp">
-	<form action="filter">
+	<form action="/filter">
 		<!-- filter price -->
 		<? if (in_array('price', $filters)) include 'price.php'; ?>
 		
-		<!-- filter connecting thread -->
-		<? if (in_array('connect_thread', $filters)) include 'connect_thread.php'; ?>
+		<? 
+			foreach ($filters as $name) {
+				if ($name == 'price') continue; 
+				$filter = (new app\modules\filter\classes\Filter)->selectByName($name);
+				if ($filter) include 'default.php';
+			}
+		?>
+		
 
 		<!-- hidden -->
 		<input type="hidden" name="id_cat" value="<?=$_GET['id_cat']?>">

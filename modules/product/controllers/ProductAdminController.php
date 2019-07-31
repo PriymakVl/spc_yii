@@ -85,6 +85,11 @@ class ProductAdminController extends BaseController
         return $this->render('update_filter', compact('filter', 'product', 'model'));
     }
 
+    public function actionUpdateImage()
+    {
+        debug('ddd');
+    }
+
     protected function findModel($id)
     {
         $product = Product::find()->where(['id' => $id, 'status' => Product::STATUS_ACTIVE])->limit(1)->one();
