@@ -9,8 +9,10 @@ use app\modules\product\classes\ProductSearch;
 use app\modules\filter\classes\Filter;
 use app\modules\filter\classes\FilterItem;
 use app\controllers\BaseController;
+use app\models\UploadForm;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 class ProductAdminController extends BaseController
 {
@@ -85,9 +87,15 @@ class ProductAdminController extends BaseController
         return $this->render('update_filter', compact('filter', 'product', 'model'));
     }
 
-    public function actionUpdateImage()
+    public function actionUploadImage($id_prod)
     {
-        debug('ddd');
+        $product = $this->findModel($id_prod);
+        $model = new UploadForm();
+        if (!Yii::$app->request->isPost) return $this->render('upload_image', compact('product', 'model'));
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if ($model->uploadImageProduct($product)) Yii::$app->session->setFlash('success', "Изображение успешно загружено");
+        else Yii::$app->session->setFlash('error', "Ошибка пр загрузке изображения");
+        return $this->redirect(['view', 'id' => $id_prod]); 
     }
 
     protected function findModel($id)

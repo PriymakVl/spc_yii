@@ -5,9 +5,11 @@ use yii\grid\GridView;
 use app\modules\category\classes\Category;
 use app\modules\product\classes\ProductPrice;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\admin\models\ProductSearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+function createLinkImage($model)
+{
+    if ($model->image) return  '<a href="/product/product-admin/upload-image?id_prod='.$model->id.'"><i class="text-success">есть</i></a>';
+    return '<a href="/product/product-admin/upload-image?id_prod='.$model->id.'"><i class="text-danger">нет</i></a>';
+}
 
 $this->title = 'Продукты';
 ?>
@@ -37,7 +39,7 @@ $this->title = 'Продукты';
             'filter' => (new Category)->convertForSelectMainWithSubcategory(),
             ],
             ['attribute' => 'image', 'label' => 'Изображение', 'format' => 'raw', 
-            'value' => function($model) {return $model->image ? '<a href="/product/product-admin/upload-image"><i class="text-success">есть</i></a>' : '<a href="/product/product-admin/upload-image"><i class="text-danger">нет</i></a>';}],
+            'value' => function($model) {return createLinkImage($model);}],
             // 'IBLOCK_ID',
             //'status',
 

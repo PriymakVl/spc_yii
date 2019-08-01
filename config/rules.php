@@ -14,4 +14,6 @@ return [
 	//admin filters
 	'admin/filters' => 'filter/filter-admin/index',
 	'admin/filter/category' => 'filter/filter-admin/category',
+	
+	'admin/product/image' => 'product/product-admin/upload-image',
 ];
