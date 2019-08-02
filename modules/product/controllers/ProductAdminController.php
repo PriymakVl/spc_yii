@@ -10,6 +10,7 @@ use app\modules\filter\classes\Filter;
 use app\modules\filter\classes\FilterItem;
 use app\controllers\BaseController;
 use app\models\UploadForm;
+use app\modules\product\classes\ProductPrice;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
@@ -40,7 +41,10 @@ class ProductAdminController extends BaseController
     public function actionCreate()
     {
         $model = new Product();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) return $this->redirect(['view', 'id' => $model->id]);
+        if ($model->load(Yii::$app->request->post()) && $model->saveProduct((object)Yii::$app->request->post('Product'))) {
+            Yii::$app->session->setFlash('success', "Продукт успешно создан");
+            return $this->redirect(['view', 'id' => $model->id]);
+        }
         return $this->render('create', compact('model'));
     }
 
@@ -48,7 +52,7 @@ class ProductAdminController extends BaseController
     {
         $model = $this->findModel($id);
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveProduct(Yii::$app->request->post());
+            $model->saveProduct((object)Yii::$app->request->post('Product'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('update', compact('model'));
@@ -57,9 +61,9 @@ class ProductAdminController extends BaseController
 
     public function actionDelete($id)
     {
-        $product = (new Product)->set($id);
+        $product = Product::findOne($id);
         $product->status = Product::STATUS_INACTIVE;
-        $prdouct->save(); 
+        $product->save(); 
         Yii::$app->session->setFlash('success', "Продукт успешно удален");
         //to do method delete with delete filters;
         return $this->redirect(['index']);
@@ -85,6 +89,16 @@ class ProductAdminController extends BaseController
             return $this->redirect(['filters', 'id_prod' => $id_prod]);
         }
         return $this->render('update_filter', compact('filter', 'product', 'model'));
+    }
+
+    public function actionUpdatePrice($id_prod)
+    {
+        $product = Product::findOne($id_prod);
+        $model = $product->price ? $product->price : new ProductPrice();
+        if (!$this->request->isPost) return $this->render('update_price', compact('product', 'model'));
+        debug((object)$this->request->post('ProductPrice'));
+        $model->validate()->savePrice((object)$this->request->post('ProductPrice'))->setFlash('success', 'Цена успешно изменена');
+        return $this->redirect(['view', 'id' => $id_prod]);
     }
 
     public function actionUploadImage($id_prod)

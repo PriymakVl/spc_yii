@@ -7,12 +7,31 @@ use app\modules\product\classes\ProductPrice;
 
 function createLinkImage($model)
 {
-    if ($model->image) return  '<a href="/product/product-admin/upload-image?id_prod='.$model->id.'"><i class="text-success">есть</i></a>';
-    return '<a href="/product/product-admin/upload-image?id_prod='.$model->id.'"><i class="text-danger">нет</i></a>';
+    return sprintf('<a class="product-image-link %s" href="/product/product-admin/upload-image?id_prod=%s">%s</a>', 
+        $model->image ? '' : 'text-danger', $model->id, $model->image ? 'есть' : 'нет');
+}
+
+function createLinkPrice($model)
+{
+    $price = (new ProductPrice)->selectByIdProduct($model->id);
+    return sprintf('<a class="product-price-link %s" href="/product/product-admin/update-price?id_prod=%s">%s</a>', 
+        $price ? '' : 'text-danger', $model->id, $price ? $price->value.' '.$price->currency : 'не задана');
 }
 
 $this->title = 'Продукты';
 ?>
+<!-- style link -->
+<style type="text/css">
+    .product-price-link, .product-image-link{
+        text-decoration: underline;
+        cursor: pointer;
+        font-style: italic;
+    }
+
+    .product-price-link:hover, .product-image-link:hover {
+        text-decoration: none;
+    }
+</style>
 
 <div class="product-index">
 
@@ -33,12 +52,12 @@ $this->title = 'Продукты';
             //'id',
             'name',
             //'description:ntext',
-            ['attribute' => 'price', 'header' => 'Цена', 'headerOptions' => ['class' => 'text-info'], 'value'=> function ($model) {return (new ProductPrice)->selectByIdProduct($model->id)->value;}],
+            ['attribute' => 'price', 'header' => 'Цена', 'format' => 'raw', 'headerOptions' => ['class' => 'text-info'], 'value'=> function ($model) {return createLinkPrice($model);}],
             ['attribute' => 'id_cat', 
             'value' => function($model) {return Category::findOne($model->id_cat)->name;}, 
             'filter' => (new Category)->convertForSelectMainWithSubcategory(),
             ],
-            ['attribute' => 'image', 'label' => 'Изображение', 'format' => 'raw', 
+            ['attribute' => 'image', 'header' => 'Изображение', 'format' => 'raw', 'headerOptions' => ['class' => 'text-info'],
             'value' => function($model) {return createLinkImage($model);}],
             // 'IBLOCK_ID',
             //'status',

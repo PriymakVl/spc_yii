@@ -32,9 +32,10 @@ trait ProductAdminTrait {
 
 	public function getCategoriesForSelect()
 	{
-		if (!$this->category) return [];
-		if (!$this->category->parent) $this->category->getParent();
-		if (!$this->category->parent) return Category::find()->select(['name', 'id'])->indexBy('id')->column();
-		return Category::find()->select(['name', 'id'])->where(['id_parent' => $this->category->id_parent])->indexBy('id')->column();
+		//return (new Category)->convertForSelectMainWithSubcategory();
+		// if (!$this->category) return Category::find()->select(['name', 'id'])->where([])->indexBy('id')->column();
+		// if (!$this->category->parent) $this->category->getParent();
+		// if (!$this->category->parent) return Category::find()->select(['name', 'id'])->indexBy('id')->column();
+		// return Category::find()->select(['name', 'id'])->where(['id_parent' => $this->category->id_parent])->indexBy('id')->column();
 	}
 }

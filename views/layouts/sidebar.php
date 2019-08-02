@@ -45,11 +45,11 @@ use app\widgets\FilterWidget;
 		</div>
 		<div class="articles-items">
 			<article>
-				<?= Html::img('@prod/1.jpeg', ['alt' => 'Использование панелей оператора HMI', 'width' => '60', 'height'=> '60']) ?>
+				<?= Html::img('web/images/3eb5b9d93354b4f63a4c9c6c27d5987c.jpg', ['alt' => 'Использование панелей оператора HMI', 'width' => '60', 'height'=> '60']) ?>
 				<span>Использование панелей оператора HMI</span>
 			</article>
 			<article>
-				<?= Html::img('@prod/2.jpeg', ['alt' => 'Программирование PLC Xinje', 'width' => '60', 'height'=> '60']) ?>
+				<?= Html::img('web/images/aec84e4b0620eeaf6ec8b9693c284f9a.jpg', ['alt' => 'Программирование PLC Xinje', 'width' => '60', 'height'=> '60']) ?>
 				<span>Программиро-<br>вание PLC Xinje</span>
 			</article>
 		</div>

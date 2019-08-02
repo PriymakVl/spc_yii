@@ -17,8 +17,8 @@ class ProductSearch extends Product
     {
         return [
             [['id', 'status'], 'integer'],
-            [['id_cat'],'string'],
-            [['name', 'description', 'price'], 'safe'],
+            [['id_cat'],'integer'],
+            [['name'], 'string'],
         ];
     }
 
@@ -62,9 +62,9 @@ class ProductSearch extends Product
             'IBLOCK_ID' => [14], //32
         ]);
 
-        $query->andFilterWhere(['like', 'code', $this->name])
-            ->andFilterWhere(['like', 'description', $this->description])
-            ->andFilterWhere(['like', 'price', $this->price]);
+        $query->andFilterWhere(['like', 'name', $this->name]);
+            //->andFilterWhere(['like', 'description', $this->description])
+            //->andFilterWhere(['like', 'price', $this->price]);
 
         return $dataProvider;
     }

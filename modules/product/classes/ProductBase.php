@@ -27,10 +27,10 @@ class ProductBase extends ModelBase {
     public function rules()
     {
         return [
-            [['name', 'id_cat'], 'required'],
+            [['name', 'id_cat', 'preview'], 'required'],
             [['description'], 'string'],
             [['id_cat', 'status'], 'integer'],
-            [['name'], 'string', 'max' => 255],
+            [['name', 'preview'], 'string', 'max' => 255],
             //[['price'], 'string', 'max' => 100],
         ];
     }

@@ -26,12 +26,12 @@ class Product extends ProductBase {
 
     public function getCategory()
     {
-        return (new Category)->get($this->id_cat);
+        if ($this->id_cat) return (new Category)->get($this->id_cat);
     }
 
     public function getImage()
     {
-        return (new Image)->get($this->id_img);
+        if ($this->id_img) return (new Image)->get($this->id_img);
     }
 
     public function getPrice()
@@ -45,14 +45,14 @@ class Product extends ProductBase {
         return $this;
     }
 
-    public function saveProduct($post)
+    public function saveProduct($form)
     {
-        $product = (object) $post['Product'];
-        $this->name = $product->name;
-        $this->preview = $product->preview;
-        $this->description = $product->description;
-        $this->updatePrice();
-        $this->save();
+        $this->name = $form->name;
+        $this->preview = $form->preview;
+        $this->description = $form->description;
+        $this->IBLOCK_ID = 14;//1c bitrix
+        // $this->updatePrice();
+        return $this->save();
     }
 
     private function updatePrice()

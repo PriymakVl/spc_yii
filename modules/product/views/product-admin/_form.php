@@ -2,10 +2,8 @@
 
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\modules\category\classes\Category;
 
-/* @var $this yii\web\View */
-/* @var $model app\modules\admin\models\Product */
-/* @var $form yii\widgets\ActiveForm */
 ?>
 
 <style>
@@ -24,20 +22,16 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 
-    <?= $form->field($model, 'preview')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'preview')->textInput(['maxlength' => true])->label("Краткое описание") ?>
 
     <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>
-    <!-- price -->
-    <div class="form-price-wrp">
-        <?= $form->field($model, 'price')->textInput(['value' => $model->price->value]) ?>
-        <?= $form->field($model, 'currency')->textInput(['value' => $model->price->currency]) ?>
-    </div>
 
     <?//= $form->field($model, 'id_cat')->textInput() ?>
-    <?= $form->field($model, 'id_cat')->dropdownList($model->getCategoriesForSelect()); ?>
+    <?= $form->field($model, 'id_cat')->dropdownList((new Category)->convertForSelectMainWithSubcategory(), ['prompt' => 'Не выбрана']); ?>
 
     <div class="form-group">
         <?= Html::submitButton('Сохранить', ['class' => 'btn btn-success']) ?>
+        <?= Html::a('Отменить', ['index'], ['class' => 'btn btn-info']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

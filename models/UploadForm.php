@@ -31,8 +31,8 @@ class UploadForm extends Model
         if (!$this->upload()) throw new NotFoundHttpException('Ошибка при загрузке файла.');
         $image = Image::saveImg($product->image);
         debug($image);
-        $product->id_img = $image->id
-        retunr $product->save();
+        $product->id_img = $image->id;
+        return $product->save();
     }
 
 

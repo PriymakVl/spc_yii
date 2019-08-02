@@ -2,6 +2,7 @@
 
 namespace app\models;
 
+use Yii;
 use yii\db\ActiveRecord;
 use app\helpers\Helper;
 
@@ -48,6 +49,12 @@ class ModelBase extends ActiveRecord {
     {
         $this->status = 0;
         $this->save();
+        return $this;
+    }
+
+    public function setFlash($type, $message)
+    {
+        Yii::$app->session->setFlash($type, $message);
         return $this;
     }
 
