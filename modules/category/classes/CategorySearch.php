@@ -58,7 +58,7 @@ class CategorySearch extends Category
         $query->andFilterWhere([
             'id' => $this->id,
             'id_parent' => $this->id_parent,
-            'status' => $this->status,
+            'status' => self::STATUS_ACTIVE,
             'IBLOCK_ID' => [14], //32
         ]);
 

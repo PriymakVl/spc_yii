@@ -10,6 +10,8 @@ use app\modules\filter\classes\Filter;
 use app\controllers\BaseController;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use app\models\UploadForm;
 
 class CategoryAdminController extends BaseController
 {
@@ -53,7 +55,7 @@ class CategoryAdminController extends BaseController
     {
         $model = new Category();
         if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-            $model->saveCategory();
+            $model->saveCategory((object)Yii::$app->request->post('Category'));
             return $this->redirect(['view', 'id' => $model->id]);
         }
         return $this->render('create', compact('model'));
@@ -69,11 +71,11 @@ class CategoryAdminController extends BaseController
         return $this->render('update', compact('model'));
     }
 
-    public function actionDelete($id_cat)
+    public function actionDelete($id)
     {
-        $cat = Category::findOne($id_cat);
+        $cat = Category::findOne($id);
         $cat->status = self::STATUS_INACTIVE;
-        $cat->save();
+        if ($cat->save()) $cat->setFlash('success', 'Категория успешно удалена');
         return $this->redirect(['index']);
     }
 
@@ -90,6 +92,17 @@ class CategoryAdminController extends BaseController
         if (CategoryFilter::saveFilters((object)$_GET)) Yii::$app->session->setFlash('success', "Филтры успешно добавлены в категорию");
         else Yii::$app->session->setFlash('error', "Ошибка при добавлении фильтров в категорию");
         return $this->redirect(['category-admin/view', 'id' => $id_cat]);
+    }
+
+     public function actionUploadImage($id_cat)
+    {
+        $cat = $this->findModel($id_cat);
+        $model = new UploadForm();
+        if (!Yii::$app->request->isPost) return $this->render('upload_image', compact('cat', 'model'));
+        $model->imageFile = UploadedFile::getInstance($model, 'imageFile');
+        if ($model->uploadImageCategory($cat)) Yii::$app->session->setFlash('success', "Изображение успешно загружено");
+        else Yii::$app->session->setFlash('error', "Ошибка пр загрузке изображения");
+        return $this->redirect(['view', 'id' => $id_cat]); 
     }
 
     protected function findModel($id)

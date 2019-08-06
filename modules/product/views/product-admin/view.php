@@ -10,7 +10,7 @@ $this->title = $model->preview;
 $this->params['breadcrumbs'][] = ['label' => 'Products', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
- // debug($model->createListFilters());
+    // debug($model->price, false);
 ?>
 <div class="product-view">
 

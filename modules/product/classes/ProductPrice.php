@@ -21,8 +21,8 @@ class ProductPrice extends ModelBase {
     public function rules()
     {
         return [
-            [['value', 'currency'], 'required'],
-            [['value', 'currency'], 'string', 'max' => 255],
+            [['value', 'currency'], 'string', 'max' => 20],
+            // [['value', 'currency'], 'required'],
         ];
     }
 
@@ -36,6 +36,7 @@ class ProductPrice extends ModelBase {
     {
     	$this->value = $form->value;
     	$this->currency = $form->currency;
+        $this->id_prod = $form->id_prod;
     	if ($this->save()) return $this;
     	throw new NotFoundHttpException('Ошибка при назначении цены');
     }

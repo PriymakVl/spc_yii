@@ -4,9 +4,11 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use app\modules\category\classes\Category;
 
-/* @var $this yii\web\View */
-/* @var $searchModel app\modules\category\classes\CategorySearch */
-/* @var $dataProvider yii\data\ActiveDataProvider */
+function createLinkImage($model)
+{
+    return sprintf('<a class="category-image-link %s" href="/category/category-admin/upload-image?id_cat=%s">%s</a>', 
+        $model->image ? '' : 'text-danger', $model->id, $model->image ? 'есть' : 'нет');
+}
 
 $this->title = 'Категории';
 $this->params['breadcrumbs'][] = $this->title;
@@ -28,6 +30,8 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             'name',
+            ['attribute' => 'image', 'header' => 'Изображение', 'format' => 'raw', 'headerOptions' => ['class' => 'text-info'],
+            'value' => function($model) {return createLinkImage($model);}], // 'filter' => function() {return ['все', 'без изображений', 'с изображением'];
             ['attribute' => 'id_parent', 'label' => 'Главные категории',
                 'value' => function($model) {return Category::findOne($model->id_parent)->name;}, 
                 'filter' => Category::find()->select(['name'])->where(['id_parent' => null, 'status' => Category::STATUS_ACTIVE])->asArray()->indexBy('id')->column(),

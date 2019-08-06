@@ -96,7 +96,7 @@ class ProductAdminController extends BaseController
         $product = Product::findOne($id_prod);
         $model = $product->price ? $product->price : new ProductPrice();
         if (!$this->request->isPost) return $this->render('update_price', compact('product', 'model'));
-        debug((object)$this->request->post('ProductPrice'));
+        // debug((object)$this->request->post('ProductPrice'));
         $model->validate()->savePrice((object)$this->request->post('ProductPrice'))->setFlash('success', 'Цена успешно изменена');
         return $this->redirect(['view', 'id' => $id_prod]);
     }

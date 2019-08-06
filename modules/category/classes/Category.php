@@ -38,7 +38,8 @@ class Category extends CategoryBase {
     	$this->name = $form->name;
     	$this->id_parent = $form->id_parent;
     	$this->description = $form->description;
-    	$this->save();
+        $this->IBLOCK_ID = '14';
+    	if ($this->save()) return $this;
     }
 
     public function rules()

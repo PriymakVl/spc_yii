@@ -22,7 +22,7 @@ $this->title = $model->name;
 
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+        <?= Html::a('Удалить', ['delete', 'id_cat' => $model->id], [
             'class' => 'btn btn-danger',
             'data' => [
                 'confirm' => 'Вы действительно хотите удалить эту категорию?',
@@ -30,6 +30,7 @@ $this->title = $model->name;
             ],
         ]) ?>
         <?= Html::a('Фильтры', ['category-admin/filters', 'id_cat' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Изображение', ['category-admin/upload-image', 'id_cat' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
