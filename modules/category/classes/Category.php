@@ -10,6 +10,8 @@ use app\modules\category\classes\CategoryFilter;
 
 class Category extends CategoryBase {
 
+    const PNEUMO_CYLINDER_CAT_ID = 830;
+
 	public function getProducts()
 	{
 		$products = (new Product)->selectByIdCategory($this->id);

@@ -1,3 +1,7 @@
+<?php
+	use app\modules\category\classes\Category;
+	use app\widgets\OrderFormCylinderWidget;
+?>
 <!-- css -->
 <link rel="stylesheet" type="text/css" href="/web/css/category/index/main.css">
 <link rel="stylesheet" type="text/css" href="/web/css/category/index/categories.css">
@@ -22,8 +26,12 @@
 
 	<? if ($products): ?> 
 		<? include 'products.php'; ?>
-	<? elseif($category->children): ?>
-	 	<? include 'categories.php'; ?>
+	<? elseif($cat->children): ?>
+		<? if ($cat->parent && $cat->parent->id = Category::PNEUMO_CYLINDER_CAT_ID): ?>
+			<?= OrderFormCylinderWidget::widget(['category' => $cat]); ?>
+		<? else: ?>
+	 		<? include 'categories.php'; ?>
+ 		<? endif; ?>
  	<? else: ?>
  		<p>В этой категории ничего нет</p>
 	<? endif; ?>

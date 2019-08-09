@@ -16,10 +16,11 @@ class CategoryController extends BaseController {
 
 	public function actionIndex($id_cat)
 	{
+		$cat = Category::findOne(['id' => $id_cat, 'status' => self::STATUS_ACTIVE]);
+		if ($cat->children) return $this->render('index/main', compact('cat'));
 		$query = Product::find()->where(['id_cat' => $id_cat, status => self::STATUS_ACTIVE]);
 		$pages = new Pagination(['defaultPageSize' => 6, 'totalCount' => $query->count()]);
 		$products = $query->offset($pages->offset)->limit($pages->limit)->all();
-		// if ($products) $products = Helper::callMethods($products, ['getImage', 'getPrice']);
 		return $this->render('index/main', compact('cat', 'pages', 'products'));
 	}
 
