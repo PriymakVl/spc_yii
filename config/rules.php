@@ -17,4 +17,7 @@ return [
 	
 	'admin/product/image' => 'product/product-admin/upload-image',
 
+	//order
+	'order/add-cylinder' => 'order/add-cylinder-to-cart',
+
 ];

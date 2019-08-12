@@ -14,13 +14,17 @@ class OrderController extends BaseController {
 		return $this->render('index');
 	}
 
-	public function actionAddCylinder()
+	public function actionAddCylinderToCart()
 	{
-		$model = new OrderCylinderForm();
-		if ($model->load($this->request->post()) && $model->validate()) {
-			$model->saveCylinder((object)$this->request->post('OrderCylinderForm'))->setMessage('success', 'Цилиндр добавлен в корзину');
-		}
-		else $model->setMessage('error', 'Ошибка при добавлении цилиндра в корзину');
+		$form = (object)$this->request->post('OrderCylinderForm');
+		$_SESSION['cart']['cylinders'][] = ['id_cat' => $form->id_cat, 'diameter' => $form->diameter, 'length' => $form->length, 'qty' => $form->qty];
+		// $_SESSION['cart']['cylinders'][] = $data;
+		// if (isset($this->session['cart']['cylinders'])) {
+		// 	// debug($_SESSION['cart']['cylinders'], false);
+		// 	// debug($data);
+		// 	$_SESSION['cart']['cylinders'][] = $data//array_merge($this->session['cart']['cylinders'], $data);
+		// }
+		// else $_SESSION['cart']['cylinders'][] = $data;
 		return $this->redirect($this->request->referrer);
 	}
 
@@ -28,6 +32,21 @@ class OrderController extends BaseController {
 	{
 		$this->view->title = 'Акции';
 		return $this->render('sale/main');
+	}
+
+	public function saveOrder()
+	{
+		$model = new OrderCylinderForm();
+		if ($model->load($this->request->post()) && $model->saveCylinder((object)$this->request->post('OrderCylinderForm'))) {
+			Yii::$app->session->setFlash('success', 'Цилиндр добавлен в корзину');
+		}
+		else Yii::$app->session->setFlash('error', 'Ошибка при добавлении цилиндра в корзину');
+		return $this->redirect($this->request->referrer);
+	}
+
+	private function setDataSession()
+	{
+
 	}
 
 }

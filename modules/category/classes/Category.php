@@ -14,9 +14,7 @@ class Category extends CategoryBase {
 
 	public function getProducts()
 	{
-		$products = (new Product)->selectByIdCategory($this->id);
-		if ($products) $this->callMethods($this->products, ['getImage', 'getPrice']);
-		return $products;
+        return  Product::findAll(['id_cat' => $this->id, 'status' => self::STATUS_ACTIVE, 'IBLOCK_ID' => 14]);
 	}
 
 	public function getChildren()

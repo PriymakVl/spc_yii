@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models\OrderCylinder;
+namespace app\models;
 
 use app\models\ModelBase;
 
