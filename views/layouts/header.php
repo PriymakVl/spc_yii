@@ -4,6 +4,16 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
 BaseAsset::register($this);
+
+function calculate_items_cart()
+{
+	if (empty($_SESSION['cart'])) return 0;
+	$qty_cylinders = empty($_SESSION['cart']['cylinders']) ? 0 : count($_SESSION['cart']['cylinders']);
+	$qty_products = empty($_SESSION['cart']['products']) ? 0 : count($_SESSION['cart']['products']);
+	return $qty_cylinders + $qty_products;
+}
+
+$qty_items_cart = calculate_items_cart();
 ?>
 
 <header>
@@ -55,6 +65,13 @@ BaseAsset::register($this);
 			<?= Html::img('@img/logo.jpg', ['alt' => 'Specialist']) ?>
 		</a>
 	</div>
+
+	<!-- cart -->
+	<a href="/cart" class="cart-wrp" style=" position: absolute; top: 60px; left: 240px;">
+		<!-- <i class="fas fa-shopping-cart" style="font-size: 24px;"></i> -->
+		<br>
+		<span>В вашей корзине товаров: <?= $qty_items_cart?></span>
+	</a>
 
 	<!-- search -->
 	<div class="search-wrp">

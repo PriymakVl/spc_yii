@@ -24,8 +24,10 @@ use app\modules\filter\Category;
      <!-- cylinder count -->
     <?= $form->field($model, 'qty')->textInput(['type' => 'number', 'value' => 1])->label('Количество') ?>
 
+    <?= $form->field($model, 'magnit')->radioList(['yes' => 'С магнитом', 'no' => 'Без магнита'])->label('Наличие магнита на поршне') ?>
+
     <div class="form-group">
-        <?= Html::submitButton('Купить', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Добавить в корзину', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

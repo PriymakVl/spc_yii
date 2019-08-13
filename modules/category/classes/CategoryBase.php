@@ -6,11 +6,12 @@ use app\models\ModelBase;
 use app\modules\category\traits\CategoryList; 
 use app\modules\category\traits\CategoryModel; 
 use app\modules\category\traits\CategoryConvert; 
+use app\modules\category\traits\CategoryCodeCylinder; 
 
 
 class CategoryBase extends ModelBase {
 
-	use CategoryList, CategoryModel, CategoryConvert;
+	use CategoryList, CategoryModel, CategoryConvert, CategoryCodeCylinder;
     
     public static function tableName()
     {

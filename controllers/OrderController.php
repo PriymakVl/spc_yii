@@ -17,14 +17,10 @@ class OrderController extends BaseController {
 	public function actionAddCylinderToCart()
 	{
 		$form = (object)$this->request->post('OrderCylinderForm');
-		$_SESSION['cart']['cylinders'][] = ['id_cat' => $form->id_cat, 'diameter' => $form->diameter, 'length' => $form->length, 'qty' => $form->qty];
-		// $_SESSION['cart']['cylinders'][] = $data;
-		// if (isset($this->session['cart']['cylinders'])) {
-		// 	// debug($_SESSION['cart']['cylinders'], false);
-		// 	// debug($data);
-		// 	$_SESSION['cart']['cylinders'][] = $data//array_merge($this->session['cart']['cylinders'], $data);
-		// }
-		// else $_SESSION['cart']['cylinders'][] = $data;
+		debug($form);
+		$data = ['id_cat' => $form->id_cat, 'diameter' => $form->diameter, 'length' => $form->length, 'qty' => $form->qty];
+		$_SESSION['cart']['cylinders'][] = 
+		Yii::$app->session->setFlash('success', 'Пневмоцилиндр добавлен в корзину');
 		return $this->redirect($this->request->referrer);
 	}
 

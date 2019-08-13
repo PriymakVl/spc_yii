@@ -13,6 +13,7 @@ class OrderCylinderForm extends Model
     public $diameter;
     public $length;
     public $qty;
+    public $magnit;
 
     public function rules()
     {

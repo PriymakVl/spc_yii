@@ -9,6 +9,7 @@ return [
 	'admin/login' => 'admin/admin/login',
 	'contacts' => 'main/contacts',
 	'sale' => 'main/sale',
+	'cart' => 'main/cart',
 	'search' => 'product/product/search',
 	'filter' => 'category/category/filter',
 	//admin filters

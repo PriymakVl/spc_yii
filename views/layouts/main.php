@@ -2,6 +2,7 @@
     use app\assets\BaseAsset;
     use yii\helpers\Html;
     use app\widgets\CatalogMenuWidget;
+    use app\widgets\Alert;
 
     BaseAsset::register($this);
 ?>
@@ -32,10 +33,14 @@
         <?=$this->render('top_menu')?>
     </div>
 
+    <?= Alert::widget() ?>
+
     <!-- content -->
     <div id="content">
+
         <!-- sidebar --> 
         <?=$this->render('sidebar')?>
+
         <!-- main -->
         <?= $content ?>
     </div>

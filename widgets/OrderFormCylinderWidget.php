@@ -15,7 +15,7 @@ class OrderFormCylinderWidget extends Widget {
 	public function run()
 	{
 		$series = $this->createSeriesArray();
-		$diameters = [12 => '12мм', 16 => '16мм', 20 => '20мм', 25 => '25мм', 32 => '32мм', 40 => '40мм', 50 => '50мм', 63 => '63мм', 80 => '80мм', 100 => '100мм'];
+		$diameters = $this->getDiameters();
 		$model = new OrderCylinderForm();
 		$model->id_cat = $this->category->id;
 		return $this->render('order_form_cylinder', compact('series', 'model', 'diameters'));
@@ -25,6 +25,13 @@ class OrderFormCylinderWidget extends Widget {
 	{
 		$categories = Category::find()->where(['id_parent' => Category::PNEUMO_CYLINDER_CAT_ID, 'status' => Category::STATUS_ACTIVE])->asArray()->all();
 		return ArrayHelper::map($categories, 'id', 'name');
+	}
+
+	public function getDiameters()
+	{
+		$diameters = [12 => '12мм', 16 => '16мм', 20 => '20мм', 25 => '25мм', 32 => '32мм', 40 => '40мм', 50 => '50мм', 
+		63 => '63мм', 80 => '80мм', 100 => '100мм'];
+		return $diameters;
 	}
 
 

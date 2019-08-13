@@ -26,4 +26,25 @@ class MainController extends BaseController {
 		return $this->render('sale/main');
 	}
 
+	public function actionCart()
+	{
+		$cart = $this->session->get('cart');
+		debug($cart);
+		$this->view->title = 'Корзина';
+		return $this->render('cart/main', compact('cart'));
+	}
+
+	public function actionDeleteItemCart($type, $index)
+	{
+		unset($_SESSION['cart'][$type][$index]);
+		if (empty($_SESSION['cart'][$type])) unset($_SESSION['cart'][$type]);
+		Yii::$app->session->setFlash('success', 'Продукт удален из корзины');
+		return $this->redirect('cart');
+	}
+
+	// private function deleteSession($type, $index)
+	// {
+	// 	if ($type == 'cylinders') 
+	// }
+
 }
