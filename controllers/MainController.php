@@ -29,7 +29,6 @@ class MainController extends BaseController {
 	public function actionCart()
 	{
 		$cart = $this->session->get('cart');
-		debug($cart);
 		$this->view->title = 'Корзина';
 		return $this->render('cart/main', compact('cart'));
 	}
@@ -42,9 +41,10 @@ class MainController extends BaseController {
 		return $this->redirect('cart');
 	}
 
-	// private function deleteSession($type, $index)
+	// public function saveOrder()
 	// {
-	// 	if ($type == 'cylinders') 
+	// 	$model = 
+	// 	$id_order = (new Order)->saveOrder();
 	// }
 
 }

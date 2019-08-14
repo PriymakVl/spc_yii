@@ -19,12 +19,16 @@ use app\modules\filter\Category;
     <?= $form->field($model, 'diameter')->dropDownList($diameters, ['prompt' => 'Не выбран'])->label('Диаметр поршня'); ?>
     
     <!-- cylinder length -->
-    <?= $form->field($model, 'length')->textInput()->label('Длина цилиндра,мм') ?>
+    <?= $form->field($model, 'stroke')->textInput()->label('Ход цилиндра,мм') ?>
 
      <!-- cylinder count -->
     <?= $form->field($model, 'qty')->textInput(['type' => 'number', 'value' => 1])->label('Количество') ?>
-
-    <?= $form->field($model, 'magnit')->radioList(['yes' => 'С магнитом', 'no' => 'Без магнита'])->label('Наличие магнита на поршне') ?>
+    
+    <!-- cylinder magneto -->
+    <?= $form->field($model, 'magneto')->radioList(['yes' => 'С магнитом', 'no' => 'Без магнита'])->label('Наличие магнита на поршне') ?>
+    
+    <!-- cylinder thread rod -->
+    <?= $form->field($model, 'thread_rod')->radioList(['inner' => 'Внутренняя', 'out' => 'Наружная'])->label('Резба на штоке') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Добавить в корзину', ['class' => 'btn btn-success']) ?>

@@ -1,3 +1,7 @@
+<?php
+use yii\helpers\Html;	
+?>
+
 <main>
 	<!-- breadcrumbs -->
 	<div class="breadcrumbs-wrp">
@@ -25,11 +29,18 @@
 			<? if (isset($cart['cylinders'])): ?>
 				<? include 'cylinders.php'; ?>
 			<? endif ?>
-
 		</table>
+
+		<button type="button" class="btn btn-success" data-toggle="modal" data-target="#checkout">
+  			Оформить заказ
+		</button>
+
 		<? else: ?>
 			<p>В корзине еще нет товаров</p>
 		<? endif; ?>
+
+		<!-- checkout form -->
+		<? include 'checkout_form.php'; ?>
 	</div>
 
 </main>

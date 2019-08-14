@@ -11,28 +11,30 @@ class OrderCylinderForm extends Model
 {
     public $id_cat;
     public $diameter;
-    public $length;
+    public $stroke;
     public $qty;
-    public $magnit;
+    public $magneto;
+    public $thread_rod;
 
     public function rules()
     {
         return [
-            [['id_cat', 'diameter', 'length', 'qty'], 'integer'],
+            [['id_cat', 'diameter', 'stroke', 'qty'], 'integer'],
             [['id_cat', 'diameter', 'length', 'qty'], 'required'],
+            [['magneto', 'thread_rod'], 'string'],
         ];
     }
 
-    public function saveCylinder($form)
-    {
-        if (!$this->validate()) throw new NotFoundHttpException('Ошибка валидации');
-        $cylinder = new OrderCylinder;
-        $cylinder->qty = $form->qty;
-        $cylinder->diameter = $form->diameter;
-        $cylinder->length = $form->length;
-        $cylinder->id_cat = $form->id_cat;
-        return $cylinder->save();
-    }
+    // public function saveCylinder($form)
+    // {
+    //     if (!$this->validate()) throw new NotFoundHttpException('Ошибка валидации');
+    //     $cylinder = new OrderCylinder;
+    //     $cylinder->qty = $form->qty;
+    //     $cylinder->diameter = $form->diameter;
+    //     $cylinder->length = $form->length;
+    //     $cylinder->id_cat = $form->id_cat;
+    //     return $cylinder->save();
+    // }
 
 
 
