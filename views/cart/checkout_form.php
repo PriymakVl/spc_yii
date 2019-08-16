@@ -14,7 +14,7 @@
         <h4 class="modal-title">Оформить заказ</h4>
       </div>
     
-   <form>
+   <form action="/order/save">
       <!-- Modal body -->
       <div class="modal-body">
          <!-- name -->
@@ -24,18 +24,18 @@
          </div>
          <!-- email -->
          <div class="form-group">
-            <label for="email">Ваше email:</label>
+            <label for="email">Ваш email:</label>
             <input type="text" class="form-control input-sm" id="email" name="email">
          </div>
          <!-- phone customer -->
          <div class="form-group">
-            <label for="phone">Ваше email:</label>
+            <label for="phone">Ваш телефон:</label>
             <input type="text" class="form-control input-sm" id="phone" name="phone">
          </div>
          <!-- comment -->
          <div class="form-group">
-            <label for="comment">Коментарий к заказу:</label>
-            <textarea class="form-control" rows="5" id="comment" name="comment"></textarea>
+            <label for="note">Коментарий к заказу:</label>
+            <textarea class="form-control" rows="5" id="note" name="note"></textarea>
          </div> 
       </div>
 

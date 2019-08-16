@@ -6,12 +6,15 @@
 	use app\modules\category\classes\Category;
 	use app\models\OrderCylinderForm;
 	
-class OrderController extends BaseController {
+class CartController extends BaseController {
 
 	public function actionIndex()
 	{
+		// $this->view->title = 'Корзина';
+		// return $this->render('index');
+		$cart = $this->session->get('cart');
 		$this->view->title = 'Корзина';
-		return $this->render('index');
+		return $this->render('index', compact('cart'));
 	}
 
 	public function actionAddCylinderToCart()
@@ -21,21 +24,19 @@ class OrderController extends BaseController {
 		return $this->redirect($this->request->referrer);
 	}
 
-	public function actionSale()
+	public function actionDeleteItemCart($type, $index)
 	{
-		$this->view->title = 'Акции';
-		return $this->render('sale/main');
+		unset($_SESSION['cart'][$type][$index]);
+		if (empty($_SESSION['cart'][$type])) unset($_SESSION['cart'][$type]);
+		Yii::$app->session->setFlash('success', 'Продукт удален из корзины');
+		return $this->redirect('cart');
 	}
 
-	// public function actionSaveOrder()
+	// public function actionCart()
 	// {
-	// 	$model = new OrderForm();
-	// 	if ($model->load($this->request->post()) ) {
-	// 		$model->saveOrder((object)$this->request->post('OrderCylinderForm'))
-	// 		Yii::$app->session->setFlash('success', 'Заказ оформлен');
-	// 	}
-	// 	else Yii::$app->session->setFlash('error', 'Ошибка при оформлении заказа');
-	// 	return $this->redirect($this->request->referrer);
+	// 	$cart = $this->session->get('cart');
+	// 	$this->view->title = 'Корзина';
+	// 	return $this->render('cart/main', compact('cart'));
 	// }
 
 	private function setSessionCylinder()

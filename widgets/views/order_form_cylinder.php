@@ -10,7 +10,7 @@ use app\modules\filter\Category;
 
 <div class="order-form-cylinder">
 
-    <?php $form = ActiveForm::begin(['action' => ['/order/add-cylinder']]); ?>
+    <?php $form = ActiveForm::begin(['action' => ['/cart/add-cylinder']]); ?>
 
     <!-- series cylinder -->
     <?= $form->field($model, 'id_cat')->dropDownList($series, ['prompt' => 'Не выбрана'])->label('Серия пневмоцилиндра'); ?>

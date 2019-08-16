@@ -9,7 +9,6 @@ return [
 	'admin/login' => 'admin/admin/login',
 	'contacts' => 'main/contacts',
 	'sale' => 'main/sale',
-	'cart' => 'main/cart',
 	'search' => 'product/product/search',
 	'filter' => 'category/category/filter',
 	//admin filters
@@ -18,7 +17,8 @@ return [
 	
 	'admin/product/image' => 'product/product-admin/upload-image',
 
-	//order
-	'order/add-cylinder' => 'order/add-cylinder-to-cart',
+	//cart
+	'cart' => 'cart/index',
+	'cart/add-cylinder' => 'cart/add-cylinder-to-cart',
 
 ];
